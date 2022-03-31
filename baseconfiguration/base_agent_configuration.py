@@ -361,7 +361,7 @@ zero_info_trader_ST = AgentConfiguration( "ZeroInfoST", {
     "latencyStdevPct": intraday_traders_latencyStdevPct,
     "agentSymbols": intraday_traders_agentSymbols,
     "lookback": [20, 50],
-    "triggerSecs": [300, 900],
+    "triggerSecs": [600, 2700],
     "stopMultiplier": [10., 20., True],
     "parameter": [200, 900, True],
     "recalcOnLoss": "false",
