@@ -3,6 +3,13 @@
 from  configgenerator.agent_configuration import AgentConfiguration
 
 ### INSTITUTIONS ###
+
+hark_broker_isntitution = AgentConfiguration("HarkBrokerInstitution", { "minLatency":100,
+                                                                        "meanLatency":500000,
+                                                                        "latencyStdevPct":0.5,
+                                                                        "brokerSide": "empty",
+                                                                        "initialCash":1000000}
+                                             )
 longshort_institutions_LT = AgentConfiguration( "LongShortInstitutionLT" ,
                                                 {"minLatency" : 100,
                                                  "meanLatency" : 500000,
@@ -151,7 +158,7 @@ pair_traders = AgentConfiguration( "PairsTrader",
 intraday_traders_minLatency = 100
 intraday_traders_meanLatency = 500000
 intraday_traders_latencyStdevPct = 0.5
-intraday_traders_agentSymbols = "ABC,DEF,GHI"
+intraday_traders_agentSymbols = "ABC" #,DEF,GHI"
 
 ## Opening range traders
 openingrange_traders = AgentConfiguration( "OpeningRangeTrend",

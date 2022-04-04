@@ -32,16 +32,17 @@ if __name__ == "__main__":
         values=marketmaker_traders.make_param(9).to_dict(orient='records')
     )
 
-    # Pairtraders
-    agent_values = pair_traders.make_param(35).to_dict(orient='records')
-    for d in agent_values:
-        d["lookbackPeriods"] = int(d["horizon"] / d["updateInterval"])
-
-    new_config.add_agent(
-        name=pair_traders.name,
-        values=agent_values
-
-    )
+    # No pairs to be traded in a single instrument sim
+    # # Pairtraders
+    # agent_values = pair_traders.make_param(35).to_dict(orient='records')
+    # for d in agent_values:
+    #     d["lookbackPeriods"] = int(d["horizon"] / d["updateInterval"])
+    #
+    # new_config.add_agent(
+    #     name=pair_traders.name,
+    #     values=agent_values
+    #
+    # )
 
     n_ls_institutions = 500
     name = "LongShortInstitution"
@@ -59,6 +60,17 @@ if __name__ == "__main__":
         values=sectorrotate_institution_LT.make_param(n= 50).to_dict(orient='records')
     )
 
+    # HarkBroker
+    name = "HarkBrokerInstitution"
+    hark_broker_isntitution.parameters["brokerSide"] = "BuyTarget"
+    buy_broker = hark_broker_isntitution.make_param(n=1).to_dict(orient='records')
+    hark_broker_isntitution.parameters["brokerSide"] = "SellTarget"
+    sell_broker = hark_broker_isntitution.make_param(n=1, start_number = 1).to_dict(orient='records')
+
+    new_config.add_agent(
+        name=name,
+        values=buy_broker+sell_broker
+    )
     # Zero info traders
     name = "ZeroInfo"
     n_zi_st = 50
