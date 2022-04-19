@@ -12,6 +12,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     random_seed = args.seed
     run_name = args.run_name
+    number_of_days = args.number_of_days
     config_name = "get from somewhere"
 
     config_dir = args.conf_dir
@@ -21,11 +22,13 @@ if __name__ == "__main__":
         path=config_dir,
         file_name=run_name # We may want a different file name than run name
     )
-
+    start_date = "1/1/2017 9:30:00"
+    start_date_dt = datetime.datetime.strptime(start_date, "%m/%d/%Y %H:%M:%S")
+    end_date_dt = start_date_dt + BDay(number_of_days)
     # start and end dates year, month, day, hour, minute,second
     new_config.add_dates(
-        2017, 1, 1, 9, 30, 00,
-        2018, 1, 1, 16, 30, 00
+        start_date_dt.year, start_date_dt.month, start_date_dt.day, 9, 30, 00,
+        end_date_dt.year, end_date_dt.month, end_date_dt.day, 16, 30, 00
     )
     new_config.add_agent(
         name=marketmaker_traders.name,
