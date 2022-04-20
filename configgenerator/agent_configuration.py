@@ -1,5 +1,5 @@
 import pandas as pd
-import numpy as np
+#import numpy as np
 class AgentConfiguration:
     '''
     Class for setting up a configuration for a group of agents.
@@ -10,13 +10,14 @@ class AgentConfiguration:
         self.parameters = params
         self.name = name
 
-    def make_param(self, n, start_number = 0, name_suffix = "") -> pd.DataFrame:
+    def make_param(self,np, n, start_number = 0, name_suffix = "") -> pd.DataFrame:
         '''For each agent generate a set of parameters from defined in self.params. There are three ways the
          params can be generated, depending on the type of value in the self.params dict.
          1. if val is a list of length 2. a random value is returned bound by the first and second number in the list
          2. if value is a list of length three, containing two numbers and a bool, a random value is drawn between the
           first and second number as well as keeping the limits.
          3. if value is not a list its is passed through.'''
+
         if type(n) == float:
             n = int(n)
         if type(start_number) == float :
