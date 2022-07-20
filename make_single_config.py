@@ -58,21 +58,21 @@ if __name__ == "__main__":
     #
     # )
 
-    n_ls_institutions = 500
-    name = "LongShortInstitution"
-    if n_ls_institutions > 0:
+    n_dls_institutions = 100
+    name = "DividendInstitution"
+    if n_dls_institutions > 0:
         new_config.add_agent(
             name=name,
-            values=longshort_institutions_LT.make_param(np,n_ls_institutions).to_dict(
+            values=dividend_longshort_institutions_LT.make_param(np,n_dls_institutions).to_dict(
                 orient='records')
         )
 
-    name = "SectorRotateInstitution"
-
-    new_config.add_agent(
-        name=name,
-        values=sectorrotate_institution_LT.make_param(np,n= 50).to_dict(orient='records')
-    )
+    # name = "SectorRotateInstitution"
+    #
+    # new_config.add_agent(
+    #     name=name,
+    #     values=sectorrotate_institution_LT.make_param(np,n= 50).to_dict(orient='records')
+    # )
 
     # HarkBroker
     name = "HarkBrokerInstitution"
@@ -90,10 +90,8 @@ if __name__ == "__main__":
     n_zi_st = 50
     zi_st_get_flat = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
     zero_info_trader_ST.parameters["getFlatOnClose"] = "false"
-    zi_st_no_get_flat = zero_info_trader_ST.make_param(np,n=n_zi_st, start_number=n_zi_st, name_suffix="noFlat").to_dict(
-        orient='records')
 
-    agent_values = zi_st_get_flat + zi_st_no_get_flat
+    agent_values = zi_st_get_flat
 
     for d in agent_values:
         d["parameter"] = d["triggerSecs"]
@@ -108,7 +106,7 @@ if __name__ == "__main__":
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            aggressor_traders_ST.make_param(np,n=20),
+            aggressor_traders_ST.make_param(np,n=40),
             aggressor_traders_LT.make_param(np,n=45)
         ]).to_dict(orient='records')
     )
@@ -117,7 +115,7 @@ if __name__ == "__main__":
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            breakout_traders_ST.make_param(np,n=20),
+            breakout_traders_ST.make_param(np,n=40),
             breakout_traders_LT.make_param(np,n=45)
         ]).to_dict(orient='records')
     )
@@ -126,7 +124,7 @@ if __name__ == "__main__":
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            rsireversion_traders_ST.make_param(np,n= 25),
+            rsireversion_traders_ST.make_param(np,n= 40),
             rsireversion_traders_LT.make_param(np,n= 40)
         ]).to_dict(orient='records')
     )
@@ -136,8 +134,9 @@ if __name__ == "__main__":
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            pullbackreversion_traders_ST.make_param(np,n= 30),
-            pullbackreversion_traders_LT.make_param(np,n= 50)
+            pullbackreversion_traders_ST.make_param(np,n= 40)
+            #,
+            #pullbackreversion_traders_LT.make_param(np,n= 50)
         ]).to_dict(orient='records')
     )
 
@@ -145,8 +144,8 @@ if __name__ == "__main__":
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            scalperreversion_traders_ST.make_param(np,n=20),
-            scalperreversion_traders_LT.make_param(np,n=40)
+            scalperreversion_traders_ST.make_param(np,n=40),
+            scalperreversion_traders_LT.make_param(np,n=45)
         ]).to_dict(orient='records')
     )
 

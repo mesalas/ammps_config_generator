@@ -36,6 +36,18 @@ longshort_institutions_ST = AgentConfiguration( "LongShortInstitutionST" ,
                                                  "entryThreshold" : 0.25,
                                                  "defaultVol" : 0.005})
 
+dividend_longshort_institutions_LT = AgentConfiguration( "DividendLongShortInstitution" ,
+                                                {"minLatency" : 100,
+                                                 "meanLatency" : 500000,
+                                                 "latencyStdevPct" : 0.5,
+                                                 "forecastMin" : 60,
+                                                 "ForecastMax" : 90,
+                                                 "sizeMin" : 0.005, "sizeMax" : 0.025,
+                                                 "initialCash" : 1000000.0,
+                                                 "entryThreshold" : 0.025,
+                                                 "defaultVol" : 0.01,
+                                                 "valuationStd" : 0.01})
+
 # chock_institutions = traders_v2.Institutions(
 #     initial_number = 1,
 #     minLatency = 100,
@@ -218,7 +230,7 @@ breakout_traders_ST = AgentConfiguration( "BreakoutTrendST", {
     "lookback": [10, 20],
     "triggerSecs": [5 * 60, 60 * 60],
     "stopMultiplier": [1., 3.0, True],
-    "parameter": [1., 3., True],
+    "parameter": [1., 4., True],
     "recalcOnLoss": "false","getFlatOnClose": "true",
     "ziReversionFactor" : 0}
                                           )
@@ -231,7 +243,7 @@ breakout_traders_LT = AgentConfiguration( "BreakoutTrendLT", {
     "agentSymbols": intraday_traders_agentSymbols,
     "lookback": [10, 20],
     "triggerSecs": [60 * 60, 270 * 60],
-    "stopMultiplier": [0.5, 2.0, True],
+    "stopMultiplier": [0.5, 2.5, True],
     "parameter": [0.25, 2.5, True],
     "recalcOnLoss": "false",
     "getFlatOnClose" : "false",
@@ -276,25 +288,25 @@ rsireversion_traders_ST = AgentConfiguration( "RsiReversionST", {
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
     "agentSymbols": intraday_traders_agentSymbols,
-    "lookback": [10, 20],
-    "triggerSecs": [30 * 60, 120 * 60],
-    "stopMultiplier": [1., 3.0, True],
-    "parameter": [5.0, 25.0, True],
+    "lookback": [10, 30],
+    "triggerSecs": [60, 900],
+    "stopMultiplier": [1., 5.0, True],
+    "parameter": [20, 40, True],
     "recalcOnLoss": "false",
     "getFlatOnClose": "false",
     "ziReversionFactor" : 0}
                                               )
 
 rsireversion_traders_LT = AgentConfiguration( "RsiReversionLT", {
-    "initialCash" : 100000.0,
+    "initialCash" : 200000.0,
     "minLatency" : intraday_traders_minLatency,
     "meanLatency" : intraday_traders_meanLatency,
     "latencyStdevPct" : intraday_traders_latencyStdevPct,
     "agentSymbols" : intraday_traders_agentSymbols,
     "lookback" : [5, 15],
-    "triggerSecs" : [180*60, 480*60],
-    "stopMultiplier" : [1., 3.0, True],
-    "parameter" : [5.0, 25.0, True],
+    "triggerSecs" : [60*60, 270*60],
+    "stopMultiplier" : [1., 5.0, True],
+    "parameter" : [20.0, 40.0, True],
     "recalcOnLoss" : "false",
     "getFlatOnClose" : "false",
     "ziReversionFactor" : 0}
@@ -307,8 +319,8 @@ pullbackreversion_traders_ST = AgentConfiguration( "PullbackReversionST", {
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
     "agentSymbols": intraday_traders_agentSymbols,
-    "lookback": [10, 20],
-    "triggerSecs": [15 * 60, 180 * 60],
+    "lookback": [10, 30],
+    "triggerSecs": [30 * 60, 180 * 60],
     "stopMultiplier": [1., 2.0, True],
     "parameter": [0.0, 0.0, True],
     "recalcOnLoss": "false","getFlatOnClose": "true",
@@ -339,22 +351,22 @@ scalperreversion_traders_ST = AgentConfiguration( "ScalperReversionST", {
     "agentSymbols": intraday_traders_agentSymbols,
     "lookback": [25, 50],
     "triggerSecs": [30 * 60, 90 * 60],
-    "stopMultiplier": [1., 3., True],
-    "parameter": [1.25, 2.5, True],
+    "stopMultiplier": [1., 5., True],
+    "parameter": [1.25, 4, True],
     "recalcOnLoss": "false",
     "getFlatOnClose": "true",
     "ziReversionFactor" : 0}
                                                   )
 
 scalperreversion_traders_LT = AgentConfiguration( "ScalperReversionLT", {
-    "initialCash": 100000,
+    "initialCash": 200000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
     "agentSymbols": intraday_traders_agentSymbols,
     "lookback": [15, 30],
     "triggerSecs": [120 * 60, 400 * 60],
-    "stopMultiplier": [1., 3., True],
+    "stopMultiplier": [2., 10., True],
     "parameter": [1., 2.5, True],
     "recalcOnLoss": "false",
     "getFlatOnClose" : "false",
@@ -370,9 +382,9 @@ zero_info_trader_ST = AgentConfiguration( "ZeroInfoST", {
     "lookback": [20, 50],
     "triggerSecs": [600, 2700],
     "stopMultiplier": [10., 20., True],
-    "parameter": [200, 900, True],
+    "parameter": [600, 1800, True],
     "recalcOnLoss": "false",
-    "getFlatOnClose" : "true",
+    "getFlatOnClose" : "false",
     "ziReversionFactor" : 0.5}
                                           )
 
