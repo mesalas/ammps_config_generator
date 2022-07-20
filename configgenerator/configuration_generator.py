@@ -10,7 +10,7 @@ class AgentConfig:
 class ConfigurationWriter:
 
     def __init__(self, config_name, seed, path, file_name):
-        self.filename = path + file_name+".xlsx"
+        self.filename = path + file_name
         self.xlsxfile = xlwrt.Workbook(self.filename)
         self.add_sim_name(config_name)
         self.add_seed(seed)
