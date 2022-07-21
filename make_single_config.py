@@ -9,8 +9,8 @@ import sys
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument("--out-dir", dest="conf_dir", default = "",type = str, help = "output directory")
-parser.add_argument("--name", dest="run_name", type = str, help= "name of simulation in ammps")
-parser.add_argument("--seed", dest="seed", type = int, help = "random seed")
+parser.add_argument("--name", dest="run_name", type = str, help= "name of simulation in ammps", required=True)
+parser.add_argument("--seed", dest="seed", type = int, help = "random seed",required=True)
 parser.add_argument("--days", dest="number_of_days", type = int, default = 261, help = "days to simulate")
 
 if __name__ == "__main__":
