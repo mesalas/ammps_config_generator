@@ -58,7 +58,7 @@ if __name__ == "__main__":
     #
     # )
 
-    n_dls_institutions = 100
+    n_dls_institutions = 50
     name = "DividendInstitution"
     if n_dls_institutions > 0:
         new_config.add_agent(
