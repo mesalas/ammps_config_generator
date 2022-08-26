@@ -63,7 +63,7 @@ if __name__ == "__main__":
     if n_dls_institutions > 0:
         new_config.add_agent(
             name=name,
-            values=dividend_longshort_institutions_LT.make_param(np,n_dls_institutions).to_dict(
+            values=dividend_longshort_institutions.make_param(np,n_dls_institutions).to_dict(
                 orient='records')
         )
 

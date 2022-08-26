@@ -36,17 +36,19 @@ longshort_institutions_ST = AgentConfiguration( "LongShortInstitutionST" ,
                                                  "entryThreshold" : 0.25,
                                                  "defaultVol" : 0.005})
 
-dividend_longshort_institutions_LT = AgentConfiguration( "DividendLongShortInstitution" ,
+dividend_longshort_institutions = AgentConfiguration( "DividendLongShortInstitution" ,
                                                 {"minLatency" : 100,
                                                  "meanLatency" : 500000,
                                                  "latencyStdevPct" : 0.5,
                                                  "forecastMin" : 60,
                                                  "ForecastMax" : 90,
                                                  "sizeMin" : 0.005, "sizeMax" : 0.025,
-                                                 "initialCash" : 1000000.0,
-                                                 "entryThreshold" : 0.025,
+                                                 "initialCash" : 2500000.0,
+                                                 "entryThreshold" : 0.001,
                                                  "defaultVol" : 0.01,
-                                                 "valuationStd" : 0.01})
+                                                 "valuationStd" : 0.01,
+                                                 "dividendToPriceMin" : 1159.95,
+                                                 "dividendToPriceMax" : 1282.05})
 
 # chock_institutions = traders_v2.Institutions(
 #     initial_number = 1,
@@ -138,14 +140,14 @@ marketmaker_traders = AgentConfiguration( "MarketMaker",
                                            "lookbackPeriods": 50,
                                            "mpLookback": [120,121, True],
                                            "spreadFactor": [0.15, 0.16, True],
-                                           "recalcOnLoss": "true",
+                                           "recalcOnLoss": "false",
                                            "workSize": 105,
                                            "levels": 30,
                                            "minSpread": 0.0101,
                                            "inventoryPenalty": 0.0,
                                            "inventoryFactor" : 0.000333333,
                                            "followTrend" : 0.0,
-                                           "scaleWorkSize": "false"}
+                                           "scaleWorkSize": "true"}
                                           )
 
 
@@ -283,13 +285,13 @@ breakout_traders_LT = AgentConfiguration( "BreakoutTrendLT", {
 
 ## RsiReversion
 rsireversion_traders_ST = AgentConfiguration( "RsiReversionST", {
-    "initialCash": 100000.0,
+    "initialCash": 150000.0,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
     "agentSymbols": intraday_traders_agentSymbols,
-    "lookback": [10, 30],
-    "triggerSecs": [60, 900],
+    "lookback": [10, 20],
+    "triggerSecs": [60*60, 120*60],
     "stopMultiplier": [1., 5.0, True],
     "parameter": [20, 40, True],
     "recalcOnLoss": "false",
@@ -298,7 +300,7 @@ rsireversion_traders_ST = AgentConfiguration( "RsiReversionST", {
                                               )
 
 rsireversion_traders_LT = AgentConfiguration( "RsiReversionLT", {
-    "initialCash" : 200000.0,
+    "initialCash" : 150000.0,
     "minLatency" : intraday_traders_minLatency,
     "meanLatency" : intraday_traders_meanLatency,
     "latencyStdevPct" : intraday_traders_latencyStdevPct,
@@ -314,7 +316,7 @@ rsireversion_traders_LT = AgentConfiguration( "RsiReversionLT", {
 
 ## PullbackReversion traders
 pullbackreversion_traders_ST = AgentConfiguration( "PullbackReversionST", {
-    "initialCash": 100000,
+    "initialCash": 150000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -328,7 +330,7 @@ pullbackreversion_traders_ST = AgentConfiguration( "PullbackReversionST", {
                                                    )
 
 pullbackreversion_traders_LT = AgentConfiguration( "PullbackReversionLT", {
-    "initialCash": 100000,
+    "initialCash": 150000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -344,7 +346,7 @@ pullbackreversion_traders_LT = AgentConfiguration( "PullbackReversionLT", {
 
 ## ScalperReversion traders
 scalperreversion_traders_ST = AgentConfiguration( "ScalperReversionST", {
-    "initialCash": 100000,
+    "initialCash": 150000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -359,7 +361,7 @@ scalperreversion_traders_ST = AgentConfiguration( "ScalperReversionST", {
                                                   )
 
 scalperreversion_traders_LT = AgentConfiguration( "ScalperReversionLT", {
-    "initialCash": 200000,
+    "initialCash": 150000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -374,7 +376,7 @@ scalperreversion_traders_LT = AgentConfiguration( "ScalperReversionLT", {
                                                   )
 
 zero_info_trader_ST = AgentConfiguration( "ZeroInfoST", {
-    "initialCash": 100000,
+    "initialCash": 250000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -385,7 +387,7 @@ zero_info_trader_ST = AgentConfiguration( "ZeroInfoST", {
     "parameter": [600, 1800, True],
     "recalcOnLoss": "false",
     "getFlatOnClose" : "false",
-    "ziReversionFactor" : 0.5}
+    "ziReversionFactor" : 0.1}
                                           )
 
 zero_info_trader_LT = AgentConfiguration( "ZeroInfoLT", {
