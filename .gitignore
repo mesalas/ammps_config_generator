@@ -4,3 +4,7 @@
 baseconfiguration/__pycache__/
 
 configgenerator/__pycache__/
+
+configurations/
+
+.DS_Store
