@@ -170,7 +170,7 @@ if __name__ == "__main__":
             if len(os.listdir(batch_dir)) > 0:
                 print("{} already contain files\nPlease check it contains the intended configs\n".format(batch_dir))
             # Put shell scripts in the newly created folders
-            shellscript = "../../scripts/startsim.sh"
+            shellscript = "../../scripts/startsim_with_simulated_rpc.sh"
             copyfile(Path(shellscript), Path(batch_dir + "startsim.sh"))
 
         # Put files in batch folders modularly:
