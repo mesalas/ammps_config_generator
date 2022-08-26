@@ -10,7 +10,7 @@ for f in $FILES
 do
 	echo "running $f"
 	echo "dotnet amm.engine.dll RunConfFromFile $f output $counter"
-	dotnet ../bin/amm.engine.dll RunConfFromFile $f $WORKDIR -n $counter >> $OUTDIR/log.log
+	dotnet ../bin/amm.engine.dll RunConfFromFile $f $WORKDIR -n $counter -s true>> $OUTDIR/log.log
 	#Compress output files and move to target dir
 	gzip -r $WORKDIR
 	mv $WORKDIR/*.gz $OUTDIR
