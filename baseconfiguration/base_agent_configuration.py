@@ -47,8 +47,8 @@ dividend_longshort_institutions = AgentConfiguration( "DividendLongShortInstitut
                                                  "entryThreshold" : 0.001,
                                                  "defaultVol" : 0.01,
                                                  "valuationStd" : 0.01,
-                                                 "dividendToPriceMin" : 1159.95,
-                                                 "dividendToPriceMax" : 1282.05})
+                                                 "dividendToPriceMin" : 23.199,
+                                                 "dividendToPriceMax" : 25.641})
 
 # chock_institutions = traders_v2.Institutions(
 #     initial_number = 1,
