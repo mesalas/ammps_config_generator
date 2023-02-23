@@ -46,7 +46,7 @@ if __name__ == "__main__":
         values=marketmaker_traders.make_param(np,9).to_dict(orient='records')
     )
 
-    n_dls_institutions = 50
+    n_dls_institutions = 25
     name = "DividendInstitution"
     if n_dls_institutions > 0:
         new_config.add_agent(
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     )
     # Zero info traders
     name = "ZeroInfo"
-    n_zi_st = 50
+    n_zi_st = 30
     zi_st_get_flat = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
     zero_info_trader_ST.parameters["getFlatOnClose"] = "false"
 
