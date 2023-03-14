@@ -220,13 +220,13 @@ aggressor_traders_ST = AgentConfiguration( "AggressorTrendST", {
                                            )
 
 aggressor_traders_LT = AgentConfiguration("AggressorTrendLT",
-                                          {"initialCash": 100000.0,
+                                          {"initialCash": 500000.0,
                                            "minLatency": intraday_traders_minLatency,
                                            "meanLatency": intraday_traders_meanLatency,
                                            "latencyStdevPct": intraday_traders_latencyStdevPct,
                                            "agentSymbols": intraday_traders_agentSymbols,
                                            "lookback": [10, 20],
-                                           "triggerSecs": [120 * 60, 300 * 60],
+                                           "triggerSecs": [2500, 7500],
                                            "stopMultiplier": [0.5, 2.0, True],
                                            "parameter": [1.5, 3.0, True],
                                            "recalcOnLoss": "false",
@@ -312,15 +312,15 @@ rsireversion_traders_ST = AgentConfiguration( "RsiReversionST", {
                                               )
 
 rsireversion_traders_LT = AgentConfiguration( "RsiReversionLT", {
-    "initialCash" : 150000.0,
+    "initialCash" : 500000.0,
     "minLatency" : intraday_traders_minLatency,
     "meanLatency" : intraday_traders_meanLatency,
     "latencyStdevPct" : intraday_traders_latencyStdevPct,
     "agentSymbols" : intraday_traders_agentSymbols,
     "lookback" : [5, 15],
-    "triggerSecs" : [60*60, 270*60],
-    "stopMultiplier" : [1., 5.0, True],
-    "parameter" : [20.0, 40.0, True],
+    "triggerSecs" : [2500, 7500],
+    "stopMultiplier" : [1., 3.0, True],
+    "parameter" : [5, 25, True],
     "recalcOnLoss" : "false",
     "getFlatOnClose" : "false",
     "ziReversionFactor" : 0}
@@ -388,18 +388,18 @@ scalperreversion_traders_LT = AgentConfiguration( "ScalperReversionLT", {
                                                   )
 
 zero_info_trader_ST = AgentConfiguration( "ZeroInfoST", {
-    "initialCash": 250000,
+    "initialCash": 100000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
     "agentSymbols": intraday_traders_agentSymbols,
     "lookback": [20, 50],
-    "triggerSecs": [600, 2700],
+    "triggerSecs": [200, 900],
     "stopMultiplier": [10., 20., True],
-    "parameter": [600, 1800, True],
+    "parameter": [200, 900, True],
     "recalcOnLoss": "false",
     "getFlatOnClose" : "false",
-    "ziReversionFactor" : 0.1}
+    "ziReversionFactor" : 0.5}
                                           )
 
 zero_info_trader_LT = AgentConfiguration( "ZeroInfoLT", {
