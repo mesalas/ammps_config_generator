@@ -46,6 +46,11 @@ if __name__ == "__main__":
         values=marketmaker_traders.make_param(np,9).to_dict(orient='records')
     )
 
+    new_config.add_agent(
+        name=internal_marketmaker.name,
+        values=internal_marketmaker.make_param(np,1).to_dict(orient='records')
+    )
+
     n_dls_institutions = 25
     name = "DividendInstitution"
     if n_dls_institutions > 0:

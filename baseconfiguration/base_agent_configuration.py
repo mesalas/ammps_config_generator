@@ -8,7 +8,9 @@ hark_broker_isntitution = AgentConfiguration("HarkBrokerInstitution", { "minLate
                                                                         "meanLatency":500000,
                                                                         "latencyStdevPct":0.5,
                                                                         "brokerSide": "empty",
-                                                                        "initialCash":1000000}
+                                                                        "initialCash":1000000,
+                                                                        "publicSymbol" : "ABC_NYSE",
+                                                                        "internalSymbol" : "ABC_CITADEL"}
                                              )
 longshort_institutions_LT = AgentConfiguration( "LongShortInstitutionLT" ,
                                                 {"minLatency" : 100,
@@ -36,19 +38,20 @@ longshort_institutions_ST = AgentConfiguration( "LongShortInstitutionST" ,
                                                  "entryThreshold" : 0.25,
                                                  "defaultVol" : 0.005})
 
-dividend_longshort_institutions = AgentConfiguration( "DividendLongShortInstitution" ,
+dividend_longshort_institutions = AgentConfiguration( "DividendInstitution" ,
                                                 {"minLatency" : 100,
                                                  "meanLatency" : 500000,
                                                  "latencyStdevPct" : 0.5,
-                                                 "forecastMin" : 60,
-                                                 "ForecastMax" : 90,
+                                                 "forecastMin" : 10,
+                                                 "ForecastMax" : 60,
                                                  "sizeMin" : 0.005, "sizeMax" : 0.025,
-                                                 "initialCash" : 2500000.0,
+                                                 "initialCash" : 1000000.0,
                                                  "entryThreshold" : 0.001,
                                                  "defaultVol" : 0.01,
-                                                 "valuationStd" : 0.01,
-                                                 "dividendToPriceMin" : 23.199,
-                                                 "dividendToPriceMax" : 25.641})
+                                                 "discountFactor" : 0.96,
+                                                 "CRRA" : 5,
+                                                 "dividendStd" : 0.011988,
+                                                 "symbol" : "ABC_NYSE"})
 
 # chock_institutions = traders_v2.Institutions(
 #     initial_number = 1,
@@ -148,6 +151,15 @@ marketmaker_traders = AgentConfiguration( "MarketMaker",
                                            "inventoryFactor" : 0.000333333,
                                            "followTrend" : 0.0,
                                            "scaleWorkSize": "true"}
+                                          )
+
+internal_marketmaker  = AgentConfiguration( "InternalMarketMaker",
+                                          {"initialCash": 1000000,
+                                           "minLatency": "-",
+                                           "meanLatency": 1,
+                                           "latencyStdevPct": "-",
+                                           "publicSymbol": "ABC_NYSE",
+                                           "privateSymbol": "ABC_CITADEL"}
                                           )
 
 
