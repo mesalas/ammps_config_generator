@@ -159,7 +159,7 @@ internal_marketmaker  = AgentConfiguration( "InternalMarketMaker",
                                            "meanLatency": 1,
                                            "latencyStdevPct": "-",
                                            "publicSymbol": "ABC_NYSE",
-                                           "privateSymbol": "ABC_CITADEL"}
+                                           "internalSymbol": "ABC_CITADEL"}
                                           )
 
 
