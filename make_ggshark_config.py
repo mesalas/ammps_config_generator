@@ -75,11 +75,11 @@ if __name__ == "__main__":
     # )
 
     # HarkBroker
-    name = "HarkBrokerInstitution"
-    hark_broker_institution.parameters["brokerSide"] = "BuyTarget"
-    buy_broker = hark_broker_institution.make_param(np, n=1).to_dict(orient='records')
-    hark_broker_institution.parameters["brokerSide"] = "SellTarget"
-    sell_broker = hark_broker_institution.make_param(np, n=1, start_number = 1).to_dict(orient='records')
+    name = "HarkBrokerInstitutionTwoVenue"
+    hark_broker_two_venue_institution.parameters["brokerSide"] = "BuyTarget"
+    buy_broker = hark_broker_two_venue_institution.make_param(np, n=1).to_dict(orient='records')
+    hark_broker_two_venue_institution.parameters["brokerSide"] = "SellTarget"
+    sell_broker = hark_broker_two_venue_institution.make_param(np, n=1, start_number = 1).to_dict(orient='records')
 
     new_config.add_agent(
         name=name,
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     )
     # Zero info traders
     name = "ZeroInfo"
-    n_zi_st = 50
+    n_zi_st = 30
     zi_st_get_flat = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
     zero_info_trader_ST.parameters["getFlatOnClose"] = "false"
 
@@ -101,53 +101,57 @@ if __name__ == "__main__":
         values=agent_values
     )
 
+    new_config.add_agent(
+        name=internal_marketmaker.name,
+        values=internal_marketmaker.make_param(np,1).to_dict(orient='records')
+    )
 
     name = "AggressorTrend"
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            aggressor_traders_ST.make_param(np,n=40),
+            #aggressor_traders_ST.make_param(np,n=40),
             aggressor_traders_LT.make_param(np,n=45)
         ]).to_dict(orient='records')
     )
 
-    name = "BreakoutTrend"
-    new_config.add_agent(
-        name=name,
-        values=pd.concat([
-            breakout_traders_ST.make_param(np,n=40),
-            breakout_traders_LT.make_param(np,n=45)
-        ]).to_dict(orient='records')
-    )
+    # name = "BreakoutTrend"
+    # new_config.add_agent(
+    #     name=name,
+    #     values=pd.concat([
+    #         breakout_traders_ST.make_param(np,n=40),
+    #         breakout_traders_LT.make_param(np,n=45)
+    #     ]).to_dict(orient='records')
+    # )
 
     name = "RsiReversion"
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            rsireversion_traders_ST.make_param(np,n= 40),
-            rsireversion_traders_LT.make_param(np,n= 40)
+            #rsireversion_traders_ST.make_param(np,n= 40),
+            rsireversion_traders_LT.make_param(np,n= 45)
         ]).to_dict(orient='records')
     )
 
 
-    name = "PullbackReversion"
-    new_config.add_agent(
-        name=name,
-        values=pd.concat([
-            pullbackreversion_traders_ST.make_param(np,n= 40)
-            #,
-            #pullbackreversion_traders_LT.make_param(np,n= 50)
-        ]).to_dict(orient='records')
-    )
-
-    name = "ScalperReversion"
-    new_config.add_agent(
-        name=name,
-        values=pd.concat([
-            scalperreversion_traders_ST.make_param(np,n=40),
-            scalperreversion_traders_LT.make_param(np,n=45)
-        ]).to_dict(orient='records')
-    )
+    # name = "PullbackReversion"
+    # new_config.add_agent(
+    #     name=name,
+    #     values=pd.concat([
+    #         pullbackreversion_traders_ST.make_param(np,n= 40)
+    #         #,
+    #         #pullbackreversion_traders_LT.make_param(np,n= 50)
+    #     ]).to_dict(orient='records')
+    # )
+    #
+    # name = "ScalperReversion"
+    # new_config.add_agent(
+    #     name=name,
+    #     values=pd.concat([
+    #         scalperreversion_traders_ST.make_param(np,n=40),
+    #         scalperreversion_traders_LT.make_param(np,n=45)
+    #     ]).to_dict(orient='records')
+    # )
 
     new_config.write_file()
 
