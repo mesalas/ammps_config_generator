@@ -76,10 +76,10 @@ if __name__ == "__main__":
 
     # HarkBroker
     name = "HarkBrokerInstitution"
-    hark_broker_isntitution.parameters["brokerSide"] = "BuyTarget"
-    buy_broker = hark_broker_isntitution.make_param(np,n=1).to_dict(orient='records')
-    hark_broker_isntitution.parameters["brokerSide"] = "SellTarget"
-    sell_broker = hark_broker_isntitution.make_param(np,n=1, start_number = 1).to_dict(orient='records')
+    hark_broker_institution.parameters["brokerSide"] = "BuyTarget"
+    buy_broker = hark_broker_institution.make_param(np, n=1).to_dict(orient='records')
+    hark_broker_institution.parameters["brokerSide"] = "SellTarget"
+    sell_broker = hark_broker_institution.make_param(np, n=1, start_number = 1).to_dict(orient='records')
 
     new_config.add_agent(
         name=name,

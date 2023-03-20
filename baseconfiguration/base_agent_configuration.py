@@ -4,14 +4,20 @@ from  configgenerator.agent_configuration import AgentConfiguration
 
 ### INSTITUTIONS ###
 
-hark_broker_isntitution = AgentConfiguration("HarkBrokerInstitution", { "minLatency":100,
+hark_broker_institution = AgentConfiguration("HarkBrokerInstitution", {"minLatency":100,
+                                                                        "meanLatency":500000,
+                                                                        "latencyStdevPct":0.5,
+                                                                        "brokerSide": "empty",
+                                                                        "initialCash":1000000})
+
+hark_broker_two_venue_institution = AgentConfiguration("HarkBrokerInstitution", {"minLatency":100,
                                                                         "meanLatency":500000,
                                                                         "latencyStdevPct":0.5,
                                                                         "brokerSide": "empty",
                                                                         "initialCash":1000000,
                                                                         "publicSymbol" : "ABC_NYSE",
                                                                         "internalSymbol" : "ABC_CITADEL"}
-                                             )
+                                                       )
 longshort_institutions_LT = AgentConfiguration( "LongShortInstitutionLT" ,
                                                 {"minLatency" : 100,
                                                  "meanLatency" : 500000,
