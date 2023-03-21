@@ -12,6 +12,7 @@ parser.add_argument("--out-dir", dest="conf_dir", default = "",type = str, help 
 parser.add_argument("--name", dest="run_name", type = str, help= "name of simulation in ammps", required=True)
 parser.add_argument("--seed", dest="seed", type = int, help = "random seed",required=True)
 parser.add_argument("--days", dest="number_of_days", type = int, default = 261, help = "days to simulate")
+parser.add_argument("--market_fraction", dest="public_market_fraction", type = float, help = "fraction of consumer orders sendt to public market",required=True)
 
 if __name__ == "__main__":
 
@@ -59,7 +60,7 @@ if __name__ == "__main__":
     #
     # )
 
-    n_dls_institutions = 50
+    n_dls_institutions = 75
     name = "DividendInstitution"
     if n_dls_institutions > 0:
         new_config.add_agent(
@@ -77,6 +78,7 @@ if __name__ == "__main__":
 
     # HarkBroker
     name = "HarkBrokerInstitutionTwoVenue"
+    hark_broker_two_venue_institution.parameters["publicMarketFraction"] = args.public_market_fraction
     hark_broker_two_venue_institution.parameters["brokerSide"] = "BuyTarget"
     buy_broker = hark_broker_two_venue_institution.make_param(np, n=1).to_dict(orient='records')
     hark_broker_two_venue_institution.parameters["brokerSide"] = "SellTarget"
@@ -91,6 +93,8 @@ if __name__ == "__main__":
     n_zi_st = 30
     zero_info_trader_ST.parameters["parameterMin"] = 400
     zero_info_trader_ST.parameters["parameterMax"] = 1800
+    zero_info_trader_ST.parameters["ziReversionFactor"] = 0.7
+
     zi_st_get_flat = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
     zero_info_trader_ST.parameters["getFlatOnClose"] = "false"
 
