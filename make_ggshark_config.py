@@ -41,6 +41,7 @@ if __name__ == "__main__":
         start_date_dt.year, start_date_dt.month, start_date_dt.day, 9, 30, 00,
         end_date_dt.year, end_date_dt.month, end_date_dt.day, 16, 30, 00
     )
+    marketmaker_traders.parameters["workSize"] = 150
     new_config.add_agent(
         name=marketmaker_traders.name,
         values=marketmaker_traders.make_param(np,9).to_dict(orient='records')
