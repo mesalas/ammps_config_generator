@@ -89,6 +89,8 @@ if __name__ == "__main__":
     # Zero info traders
     name = "ZeroInfo"
     n_zi_st = 30
+    zero_info_trader_ST.parameters["parameterMin"] = 400
+    zero_info_trader_ST.parameters["parameterMax"] = 1800
     zi_st_get_flat = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
     zero_info_trader_ST.parameters["getFlatOnClose"] = "false"
 
