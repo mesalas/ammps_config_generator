@@ -16,7 +16,8 @@ hark_broker_two_venue_institution = AgentConfiguration("HarkBrokerInstitution", 
                                                                         "brokerSide": "empty",
                                                                         "initialCash":1000000,
                                                                         "publicSymbol" : "ABC_NYSE",
-                                                                        "internalSymbol" : "ABC_CITADEL"}
+                                                                        "internalSymbol" : "ABC_CITADEL",
+                                                                         "publicMarketFraction" : 0.5}
                                                        )
 longshort_institutions_LT = AgentConfiguration( "LongShortInstitutionLT" ,
                                                 {"minLatency" : 100,
@@ -56,7 +57,9 @@ dividend_longshort_institutions = AgentConfiguration( "DividendInstitution" ,
                                                  "defaultVol" : 0.01,
                                                  "discountFactor" : 0.96,
                                                  "CRRA" : 5,
+                                                 "dividendGrowthRate": 1.000628,
                                                  "dividendStd" : 0.011988,
+                                                 "timeScale" : 90,
                                                  "symbol" : "ABC_NYSE"})
 
 # chock_institutions = traders_v2.Institutions(
