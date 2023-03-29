@@ -14,20 +14,10 @@ parser.add_argument("--seed", dest="seed", type = int, help = "random seed",requ
 parser.add_argument("--days", dest="number_of_days", type = int, default = 261, help = "days to simulate")
 parser.add_argument("--market_fraction", dest="public_market_fraction", type = float, help = "fraction of consumer orders sendt to public market",required=True)
 
-if __name__ == "__main__":
+def make_ggshark(random_seed, run_name, number_of_days, config_dir, public_market_fraction):
 
-    args = parser.parse_args()
-    args_string = ""
-    for i in range(1,len(sys.argv)):
-        args_string = args_string + " " + sys.argv[i]
-    print("Started with the following arguments:", args_string)
-    random_seed = args.seed
-    run_name = args.run_name
-    number_of_days = args.number_of_days
-    config_name = "get from somewhere"
     np.random.seed(random_seed)
 
-    config_dir = args.conf_dir
     new_config = configuration_generator.ConfigurationWriter(
         config_name=run_name,
         seed=random_seed,
@@ -43,6 +33,8 @@ if __name__ == "__main__":
         end_date_dt.year, end_date_dt.month, end_date_dt.day, 16, 30, 00
     )
     marketmaker_traders.parameters["workSize"] = 150
+    marketmaker_traders.parameters["spreadFactor"] =  [0.18, 0.19, True]
+
     new_config.add_agent(
         name=marketmaker_traders.name,
         values=marketmaker_traders.make_param(np,9).to_dict(orient='records')
@@ -62,6 +54,7 @@ if __name__ == "__main__":
 
     n_dls_institutions = 75
     name = "DividendInstitution"
+    dividend_longshort_institutions.parameters["entryThreshold"] = 0.01
     if n_dls_institutions > 0:
         new_config.add_agent(
             name=name,
@@ -78,7 +71,7 @@ if __name__ == "__main__":
 
     # HarkBroker
     name = "HarkBrokerInstitutionTwoVenue"
-    hark_broker_two_venue_institution.parameters["publicMarketFraction"] = args.public_market_fraction
+    hark_broker_two_venue_institution.parameters["publicMarketFraction"] = public_market_fraction
     hark_broker_two_venue_institution.parameters["brokerSide"] = "BuyTarget"
     buy_broker = hark_broker_two_venue_institution.make_param(np, n=1).to_dict(orient='records')
     hark_broker_two_venue_institution.parameters["brokerSide"] = "SellTarget"
@@ -162,4 +155,13 @@ if __name__ == "__main__":
 
     new_config.write_file()
 
+
+if __name__ == "__main__":
+    args = parser.parse_args()
+    args_string = ""
+    for i in range(1,len(sys.argv)):
+        args_string = args_string + " " + sys.argv[i]
+    print("Started with the following arguments:", args_string)
+
+    make_ggshark(args.seed,args.run_name,args.number_of_days,args.conf_dir,args.public_market_fraction)
 
