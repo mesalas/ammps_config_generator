@@ -59,7 +59,7 @@ dividend_longshort_institutions = AgentConfiguration( "DividendInstitution" ,
                                                  "CRRA" : 5,
                                                  "dividendGrowthRate": 1.000628,
                                                  "dividendStd" : 0.011988,
-                                                 "timeScale" : 90,
+                                                 "daysPerQuarter" : 90,
                                                  "symbol" : "ABC_NYSE"})
 
 # chock_institutions = traders_v2.Institutions(
@@ -186,7 +186,10 @@ lucas_marketmaker_traders = AgentConfiguration( "LucasMarketMaker",
                                            "scaleWorkSize": "true",
                                            "lucasFactor" : 0.0,
                                            "CRRA" : 5.0,
-                                           "discountFactor" : 0.96}
+                                           "discountFactor" : 0.96,
+                                           "dividendGrowthRate": 1.000628,
+                                           "dividendStd": 0.011988,
+                                           "daysPerQuarter" : 90}
                                           )
 
 internal_marketmaker  = AgentConfiguration( "InternalMarketMaker",
