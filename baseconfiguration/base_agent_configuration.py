@@ -60,7 +60,8 @@ dividend_longshort_institutions = AgentConfiguration( "DividendInstitution" ,
                                                  "dividendGrowthRate": 1.000628,
                                                  "dividendStd" : 0.011988,
                                                  "daysPerQuarter" : 90,
-                                                 "symbol" : "ABC_NYSE"})
+                                                 "symbol" : "ABC_NYSE",
+                                                 "valuationStd" : 0.15})
 
 # chock_institutions = traders_v2.Institutions(
 #     initial_number = 1,
