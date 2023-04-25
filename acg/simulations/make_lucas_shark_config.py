@@ -1,5 +1,5 @@
 import sys
-sys.path.append('..')
+sys.path.append('../..')
 
 from acg.configgenerator import configuration_generator
 from acg.baseconfiguration.base_agent_configuration import *
