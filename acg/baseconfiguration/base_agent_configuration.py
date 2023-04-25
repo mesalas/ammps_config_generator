@@ -1,6 +1,6 @@
 ## In this file we define the actors and the default values of them
 # Based on the homemade modules:
-from  configgenerator.agent_configuration import AgentConfiguration
+from acg.configgenerator.agent_configuration import AgentConfiguration
 
 ### INSTITUTIONS ###
 
@@ -49,11 +49,11 @@ dividend_longshort_institutions = AgentConfiguration( "DividendInstitution" ,
                                                 {"minLatency" : 100,
                                                  "meanLatency" : 500000,
                                                  "latencyStdevPct" : 0.5,
-                                                 "forecastMin" : 60,
-                                                 "ForecastMax" : 120,
+                                                 "forecastMin" : 5,
+                                                 "ForecastMax" : 15,
                                                  "sizeMin" : 0.005, "sizeMax" : 0.025,
                                                  "initialCash" : 1000000.0,
-                                                 "entryThreshold" : 0.001,
+                                                 "entryThreshold" : [0.01, 0.05, True],
                                                  "defaultVol" : 0.01,
                                                  "discountFactor" : 0.96,
                                                  "CRRA" : 5,
@@ -61,7 +61,7 @@ dividend_longshort_institutions = AgentConfiguration( "DividendInstitution" ,
                                                  "dividendStd" : 0.011988,
                                                  "daysPerQuarter" : 90,
                                                  "symbol" : "ABC_NYSE",
-                                                 "valuationStd" : 0.15})
+                                                 "valuationStd" : 0.25})
 
 # chock_institutions = traders_v2.Institutions(
 #     initial_number = 1,

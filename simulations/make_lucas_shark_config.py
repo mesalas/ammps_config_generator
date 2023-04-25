@@ -1,6 +1,9 @@
-from baseconfiguration.base_agent_configuration import *
-from configgenerator import configuration_generator
-import pandas as pd
+import sys
+sys.path.append('..')
+
+from acg.configgenerator import configuration_generator
+from acg.baseconfiguration.base_agent_configuration import *
+
 import argparse
 import datetime
 from pandas.tseries.offsets import BDay
@@ -57,15 +60,14 @@ def make_lucas_shark(random_seed, run_name, number_of_days, config_dir, lucas_fa
     #
     # )
 
-    n_dls_institutions = 75
+    n_dls_institutions = 100
     name = "DividendInstitution"
-    dividend_longshort_institutions.parameters["entryThreshold"] = 0.01
     dividend_longshort_institutions.parameters["valuationStd"] = divided_inst_valuationStd
 
     agent_values = dividend_longshort_institutions.make_param(np, n_dls_institutions).to_dict(
         orient='records')
     for d in agent_values:
-        d["initialCash"] = 1000000.0*(np.random.random()+0.5)
+        d["initialCash"] = 250000.0*(0.2+np.random.random()*(1.8-0.2))
 
     if n_dls_institutions > 0:
         new_config.add_agent(
@@ -94,10 +96,10 @@ def make_lucas_shark(random_seed, run_name, number_of_days, config_dir, lucas_fa
     # Zero info traders
     name = "ZeroInfo"
     n_zi_st = 30
-    zero_info_trader_ST.parameters["parameterMin"] = 400
+    zero_info_trader_ST.parameters["parameterMin"] = 600
     zero_info_trader_ST.parameters["parameterMax"] = 1800
-    zero_info_trader_ST.parameters["ziReversionFactor"] = 0.7
-
+    zero_info_trader_ST.parameters["ziReversionFactor"] = 0.1
+    zero_info_trader_ST.parameters["initialCash"] = 100000.0
     zi_st_get_flat = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
     zero_info_trader_ST.parameters["getFlatOnClose"] = "false"
 
@@ -105,7 +107,6 @@ def make_lucas_shark(random_seed, run_name, number_of_days, config_dir, lucas_fa
 
     for d in agent_values:
         d["parameter"] = d["triggerSecs"]
-
     new_config.add_agent(
         name=name,
         values=agent_values

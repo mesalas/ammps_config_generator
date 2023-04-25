@@ -1,10 +1,14 @@
 
 .idea/
 
-baseconfiguration/__pycache__/
+acg/baseconfiguration/__pycache__/
 
-configgenerator/__pycache__/
+acg/configgenerator/__pycache__/
 
 configurations/
 
 .DS_Store
+
+acg.egg-info/
+
+acg/__pycache__/
