@@ -136,6 +136,18 @@ sectorrotate_institution_ST = AgentConfiguration( "SectorRotateInstitutionST",
 #     latencyStdevPct = 0.5
 # )
 
+portfolio_trader = AgentConfiguration( "PortfolioTrader",
+                                                  {"minLatency": 100,
+                                                   "meanLatency": 60000000,
+                                                   "latencyStdevPct": 0.5,
+                                                   "portfolioHorizonRangeMin": 5,
+                                                   "portfolioHorizonRangeMax": 60,
+                                                   "initialCash": 10000000.0,
+                                                   "agentSymbols" : "ABC,DEF,GHI",
+                                                   "initialVol": 0.02}
+                                                  )
+
+
 
 ### MARKET MAKERS ###
 marketmaker_traders = AgentConfiguration( "MarketMaker",
