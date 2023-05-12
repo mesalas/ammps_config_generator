@@ -49,8 +49,8 @@ dividend_longshort_institutions = AgentConfiguration( "DividendInstitution" ,
                                                 {"minLatency" : 100,
                                                  "meanLatency" : 500000,
                                                  "latencyStdevPct" : 0.5,
-                                                 "forecastMin" : 5,
-                                                 "ForecastMax" : 15,
+                                                 "forecastMin" : 30,
+                                                 "ForecastMax" : 120,
                                                  "sizeMin" : 0.005, "sizeMax" : 0.025,
                                                  "initialCash" : 1000000.0,
                                                  "entryThreshold" : [0.01, 0.05, True],
@@ -257,7 +257,7 @@ openingrange_traders = AgentConfiguration( "OpeningRangeTrend",
 
 ## Aggressor traders
 aggressor_traders_ST = AgentConfiguration( "AggressorTrendST", {
-    "initialCash" : 100000.0,
+    "initialCash" : 150000.0,
     "minLatency" : intraday_traders_minLatency,
     "meanLatency" : intraday_traders_meanLatency,
     "latencyStdevPct" : intraday_traders_latencyStdevPct,
@@ -272,7 +272,7 @@ aggressor_traders_ST = AgentConfiguration( "AggressorTrendST", {
                                            )
 
 aggressor_traders_LT = AgentConfiguration("AggressorTrendLT",
-                                          {"initialCash": 500000.0,
+                                          {"initialCash": 150000.0,
                                            "minLatency": intraday_traders_minLatency,
                                            "meanLatency": intraday_traders_meanLatency,
                                            "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -288,7 +288,7 @@ aggressor_traders_LT = AgentConfiguration("AggressorTrendLT",
 
 ## BreakoutTrend traders
 breakout_traders_ST = AgentConfiguration( "BreakoutTrendST", {
-    "initialCash": 100000.0,
+    "initialCash": 150000.0,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -302,7 +302,7 @@ breakout_traders_ST = AgentConfiguration( "BreakoutTrendST", {
                                           )
 
 breakout_traders_LT = AgentConfiguration( "BreakoutTrendLT", {
-    "initialCash": 100000.0,
+    "initialCash": 150000.0,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -364,7 +364,7 @@ rsireversion_traders_ST = AgentConfiguration( "RsiReversionST", {
                                               )
 
 rsireversion_traders_LT = AgentConfiguration( "RsiReversionLT", {
-    "initialCash" : 500000.0,
+    "initialCash" : 150000.0,
     "minLatency" : intraday_traders_minLatency,
     "meanLatency" : intraday_traders_meanLatency,
     "latencyStdevPct" : intraday_traders_latencyStdevPct,
@@ -387,7 +387,7 @@ pullbackreversion_traders_ST = AgentConfiguration( "PullbackReversionST", {
     "agentSymbols": intraday_traders_agentSymbols,
     "lookback": [10, 30],
     "triggerSecs": [30 * 60, 180 * 60],
-    "stopMultiplier": [1., 2.0, True],
+    "stopMultiplier": [1., 3.0, True],
     "parameter": [0.0, 0.0, True],
     "recalcOnLoss": "false","getFlatOnClose": "true",
     "ziReversionFactor" : 0}
@@ -401,7 +401,7 @@ pullbackreversion_traders_LT = AgentConfiguration( "PullbackReversionLT", {
     "agentSymbols": intraday_traders_agentSymbols,
     "lookback": [5, 20],
     "triggerSecs": [180 * 60, 360 * 60],
-    "stopMultiplier": [1., 2.0, True],
+    "stopMultiplier": [1., 5.0, True],
     "parameter": [0.0, 0.0, True],
     "recalcOnLoss": "false",
     "getFlatOnClose" : "false",
