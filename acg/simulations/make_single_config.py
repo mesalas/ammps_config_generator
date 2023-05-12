@@ -137,9 +137,8 @@ if __name__ == "__main__":
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            pullbackreversion_traders_ST.make_param(np,n= 40)
-            #,
-            #pullbackreversion_traders_LT.make_param(np,n= 50)
+            pullbackreversion_traders_ST.make_param(np,n= 40),
+            pullbackreversion_traders_LT.make_param(np,n= 50)
         ]).to_dict(orient='records')
     )
 
