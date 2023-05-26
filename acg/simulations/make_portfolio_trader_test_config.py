@@ -55,6 +55,7 @@ def make_portfolio_trader_test(random_seed, run_name, config_dir, portfolio_trad
 
     for d in agent_values:
         d["parameter"] = d["triggerSecs"]
+        d["agentSymbols"] = "ABC,DEF,GHI"
 
     new_config.add_agent(
         name=name,
