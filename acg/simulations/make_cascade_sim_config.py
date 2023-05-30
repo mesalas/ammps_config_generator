@@ -17,6 +17,7 @@ parser.add_argument("--seed", dest="seed", type = int, help = "random seed",requ
 parser.add_argument("--days", dest="number_of_days", type = int, default = 261, help = "days to simulate")
 parser.add_argument("--zi-scaler", dest = "ZI_n_scaler", type = float, default=1.0, help = "scaling factor scaling the number of Zi agnets",required=True )
 parser.add_argument("--algo-cash-scaler", dest = "algo_cash_scaler", type = float, default=1.0, help = "scaling factor scaling cash for algo/intraday agents",required=True )
+parser.add_argument("--portfolio-update-pct", dest = "portfolio_update_pct", type = float, default=1.0, help = "Prob for new portfolio on new EPS",required=True )
 
 
 if __name__ == "__main__":
@@ -52,7 +53,8 @@ if __name__ == "__main__":
     )
 
     name = "PortfolioTrader"
-
+    portfolio_trader.parameters["updateOnEarningsPct"]  = args.portfolio_update_pct
+    portfolio_traders = portfolio_trader.make_param(np,100).to_dict(orient='records')
     new_config.add_agent(
         name=name,
         values=portfolio_trader.make_param(np,100).to_dict(orient='records')

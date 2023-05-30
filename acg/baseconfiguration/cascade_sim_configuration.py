@@ -97,9 +97,9 @@ pullbackreversion_traders_ST = AgentConfiguration( "PullbackReversionST", {
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
     "agentSymbols": intraday_traders_agentSymbols,
-    "lookback": [10, 20],
+    "lookback": [10, 50],
     "triggerSecs": [15 * 60, 180 * 60],
-    "stopMultiplier" : [1.5, 3.5, True],
+    "stopMultiplier" : [.5, 3.5, True],
     "parameter": [0.0, 0.0, True],
     "recalcOnLoss": "false",
     "getFlatOnClose": "false",
@@ -126,18 +126,18 @@ scalperreversion_traders_ST = AgentConfiguration( "ScalperReversionST", {
 
 
 zero_info_trader_ST = AgentConfiguration( "ZeroInfoST", {
-    "initialCash": 200000,
+    "initialCash": 100000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
     "agentSymbols": intraday_traders_agentSymbols,
     "lookback": [20, 50],
-    "triggerSecs": [600, 2700],
-    "stopMultiplier": [10., 20., True],
-    "parameter": [200, 900, True],
+    "triggerSecs": [600, 3600],
+    "stopMultiplier": [0.5, 5., True],
+    "parameter": [600, 3600, True],
     "recalcOnLoss": "false",
     "getFlatOnClose" : "false",
-    "ziReversionFactor" : 0.5}
+    "ziReversionFactor" : 0.25}
                                           )
 
 
@@ -151,5 +151,6 @@ portfolio_trader = AgentConfiguration( "PortfolioTrader", {
     "portfolioHorizonRangeMax" : 60,
     "initialVol" : 0.02,
     "epsGrowthRate": 0.0003,
-    "epsGrowthRateStd": 0.0006}
+    "epsGrowthRateStd": 0.006,
+    "updateOnEarningsPct" : 1.0}
                                           )
