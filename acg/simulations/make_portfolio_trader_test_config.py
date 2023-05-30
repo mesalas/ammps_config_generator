@@ -2,7 +2,7 @@ import sys
 sys.path.append('../..')
 
 from acg.configgenerator import configuration_generator
-from acg.baseconfiguration.base_agent_configuration import *
+from acg.baseconfiguration.portfolio_test_sim_configuration import *
 
 import pandas as pd
 import argparse
@@ -15,17 +15,24 @@ parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument("--out-dir", dest="conf_dir", default = "",type = str, help = "output directory")
 parser.add_argument("--name", dest="run_name", type = str, help= "name of simulation in ammps", required=True)
 parser.add_argument("--seed", dest="seed", type = int, help = "random seed",required=True)
-parser.add_argument("--portfolio-trader-int-vol", dest="portfolio_trader_int_vol", type = float, help = "initial value for the porfilio traders volatility",required=True)
+parser.add_argument("--zi-scaler", dest = "ZI_n_scaler", type = float, default=1.0, help = "scaling factor scaling the number of Zi agnets",required=True )
+parser.add_argument("--zi-tp-max", dest = "zi_tp_max", type = float, default=1.0, help = "value for take profit for Zi agnets",required=True )
+parser.add_argument("--portfolio-update-pct", dest = "portfolio_update_pct", type = float, default=1.0, help = "Prob for new portfolio on new EPS",required=True )
 
-def make_portfolio_trader_test(random_seed, run_name, config_dir, portfolio_trader_int_vol):
+if __name__ == "__main__":
+    args = parser.parse_args()
+    args_string = ""
+    for i in range(1,len(sys.argv)):
+        args_string = args_string + " " + sys.argv[i]
+    print("Started with the following arguments:", args_string)
 
-    np.random.seed(random_seed)
+    np.random.seed(args.seed)
 
     new_config = configuration_generator.ConfigurationWriter(
-        config_name=run_name,
-        seed=random_seed,
-        path=config_dir,
-        file_name=run_name # We may want a different file name than run name
+        config_name=args.run_name,
+        seed=args.seed,
+        path=args.conf_dir,
+        file_name=args.run_name # We may want a different file name than run name
     )
     start_date = "1/1/2017 9:30:00"
     start_date_dt = datetime.datetime.strptime(start_date, "%m/%d/%Y %H:%M:%S")
@@ -43,19 +50,15 @@ def make_portfolio_trader_test(random_seed, run_name, config_dir, portfolio_trad
 
     # Zero info traders
     name = "ZeroInfo"
-    n_zi_st = 30
-    zero_info_trader_ST.parameters["parameterMin"] = 600
-    zero_info_trader_ST.parameters["parameterMax"] = 3600
-    zero_info_trader_ST.parameters["ziReversionFactor"] = 0.5
+    n_zi_st = 100*args.ZI_n_scaler
 
+    zero_info_trader_ST.parameters["stopMultiplier"] = [0.5, args.zi_tp_max, True]
     zi_st_get_flat = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
-    zero_info_trader_ST.parameters["getFlatOnClose"] = "true"
 
     agent_values = zi_st_get_flat
 
     for d in agent_values:
         d["parameter"] = d["triggerSecs"]
-        d["agentSymbols"] = "ABC,DEF,GHI"
 
     new_config.add_agent(
         name=name,
@@ -63,7 +66,7 @@ def make_portfolio_trader_test(random_seed, run_name, config_dir, portfolio_trad
     )
 
     name = "PortfolioTrader"
-    portfolio_trader.parameters["initialVol"] = portfolio_trader_int_vol
+    portfolio_trader.parameters["updateOnEarningsPct"] = args.portfolio_update_pct
     new_config.add_agent(
         name=name,
         values=
@@ -72,13 +75,4 @@ def make_portfolio_trader_test(random_seed, run_name, config_dir, portfolio_trad
 
     new_config.write_file()
 
-
-if __name__ == "__main__":
-    args = parser.parse_args()
-    args_string = ""
-    for i in range(1,len(sys.argv)):
-        args_string = args_string + " " + sys.argv[i]
-    print("Started with the following arguments:", args_string)
-
-    make_portfolio_trader_test(args.seed,args.run_name,args.conf_dir,args.portfolio_trader_int_vol)
 
