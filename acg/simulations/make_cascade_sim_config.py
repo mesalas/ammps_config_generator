@@ -2,7 +2,7 @@ import sys
 sys.path.append('../..')
 
 from acg.configgenerator import configuration_generator
-from acg.baseconfiguration.cascade_sim_configuration import *
+from acg.baseconfiguration.portfolio_test_sim_configuration import *
 import pandas as pd
 import argparse
 import datetime
@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
     # Zero info traders
     name = "ZeroInfo"
-    n_zi_st = int(100 * args.ZI_n_scaler)
+    n_zi_st = int(50 * args.ZI_n_scaler)
     zi_st = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
 
     agent_values = zi_st
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     )
 
     name = "AggressorTrend"
-    aggressor_traders_ST.parameters["initialCash"] = 300000.0 * args.algo_cash_scaler
+    aggressor_traders_ST.parameters["initialCash"] = 150000.0 * args.algo_cash_scaler
 
 
 
@@ -88,7 +88,7 @@ if __name__ == "__main__":
     )
 
     name = "BreakoutTrend"
-    breakout_traders_ST.parameters["initialCash"] = 300000.0 * args.algo_cash_scaler
+    breakout_traders_ST.parameters["initialCash"] = 150000.0 * args.algo_cash_scaler
 
 
     new_config.add_agent(
@@ -99,7 +99,7 @@ if __name__ == "__main__":
     )
 
     name = "RsiReversion"
-    rsireversion_traders_ST.parameters["initialCash"] = 300000.0 * args.algo_cash_scaler
+    rsireversion_traders_ST.parameters["initialCash"] = 150000.0 * args.algo_cash_scaler
 
     new_config.add_agent(
         name=name,
@@ -108,18 +108,8 @@ if __name__ == "__main__":
         ]).to_dict(orient='records')
     )
 
-    name = "PullbackReversion"
-    pullbackreversion_traders_ST.parameters["initialCash"] = 300000.0 * args.algo_cash_scaler
-
-    new_config.add_agent(
-        name=name,
-        values=pd.concat([
-            pullbackreversion_traders_ST.make_param(np,n=100)
-        ]).to_dict(orient='records')
-    )
-
     name = "ScalperReversion"
-    scalperreversion_traders_ST.parameters["initialCash"] = 300000.0 * args.algo_cash_scaler
+    scalperreversion_traders_ST.parameters["initialCash"] = 150000.0 * args.algo_cash_scaler
 
     new_config.add_agent(
         name=name,
