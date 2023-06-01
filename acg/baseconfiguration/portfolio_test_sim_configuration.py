@@ -154,3 +154,10 @@ portfolio_trader = AgentConfiguration( "PortfolioTrader", {
     "epsGrowthRateStd": 0.006,
     "updateOnEarningsPct" : 1.0}
                                           )
+
+basic_trader = AgentConfiguration("BasicTrader" , {"initialCash" : 100000,
+                                                   "minLatency": 100,
+                                                   "meanLatency" : 60000000,
+                                                   "latencyStdevPct" : 0.5,
+                                                   "agentSymbols": "ABC,DEF,GHI",
+                                                   "costScale" : 1.0 })

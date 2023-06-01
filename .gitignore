@@ -12,3 +12,5 @@ configurations/
 acg.egg-info/
 
 acg/__pycache__/
+
+*.xlsx

@@ -469,6 +469,13 @@ zero_info_trader_LT = AgentConfiguration( "ZeroInfoLT", {
     "ziReversionFactor" : 0.5}
                                           )
 
+basic_trader = AgentConfiguration("BasicTrader" , {"initialCash" : 100000,
+                                                   "minLatency": 100,
+                                                   "meanLatency" : 60000000,
+                                                   "latencyStdevPct" : 0.5,
+                                                   "agentSymbols": "ABC,DEF,GHI",
+                                                   "costScale" : 1.0 })
+
 # # Define dictionary of intraday traders for later use
 # intraday_traders = {
 #     "OpeningRangeTrend": openingrange_traders,
