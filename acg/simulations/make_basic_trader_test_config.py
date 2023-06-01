@@ -2,7 +2,7 @@ import sys
 sys.path.append('../..')
 
 from acg.configgenerator import configuration_generator
-from acg.baseconfiguration.portfolio_test_sim_configuration import *
+from acg.baseconfiguration.basic_trader_test_configuration import *
 
 import pandas as pd
 import argparse
