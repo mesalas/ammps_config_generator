@@ -41,50 +41,51 @@ intraday_traders_agentSymbols = "ABC,DEF,GHI"
 
 ## Aggressor traders
 aggressor_traders_ST = AgentConfiguration( "AggressorTrendST", {
-    "initialCash" : 300000.0,
+    "initialCash" : 100000.0,
     "minLatency" : intraday_traders_minLatency,
     "meanLatency" : intraday_traders_meanLatency,
     "latencyStdevPct" : intraday_traders_latencyStdevPct,
     "agentSymbols" : intraday_traders_agentSymbols,
-    "lookback" : [10, 20],
-    "triggerSecs" : [5*60, 120*60],
-    "stopMultiplier" : [1.5, 3.5, True],
-    "parameter" : [1.75, 3.0, True],
+    "lookback" : [30, 60],
+    "triggerSecs" : [15*60, 120*60],
+    "stopMultiplier" : [0.5, 2.5, True],
+    "parameter" : [1.5, 4.0, True],
     "recalcOnLoss" : "false",
-    "getFlatOnClose": "false",
+    "getFlatOnClose": "true",
     "ziReversionFactor" : 0}
                                            )
 
 
 ## BreakoutTrend traders
 breakout_traders_ST = AgentConfiguration( "BreakoutTrendST", {
-    "initialCash": 300000.0,
+    "initialCash": 100000.0,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
     "agentSymbols": intraday_traders_agentSymbols,
-    "lookback": [10, 20],
-    "triggerSecs": [5 * 60, 60 * 60],
-    "stopMultiplier" : [1.5, 3.5, True],
-    "parameter": [1., 3., True],
-    "recalcOnLoss": "false","getFlatOnClose": "false",
+    "lookback": [10, 30],
+    "triggerSecs": [15 * 60, 120 * 60],
+    "stopMultiplier" : [.5, 2.5, True],
+    "parameter": [.5, 2.5, True],
+    "recalcOnLoss": "false",
+    "getFlatOnClose": "true",
     "ziReversionFactor" : 0}
                                           )
 
 
 ## RsiReversion
 rsireversion_traders_ST = AgentConfiguration( "RsiReversionST", {
-    "initialCash": 300000.0,
+    "initialCash": 100000.0,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
     "agentSymbols": intraday_traders_agentSymbols,
-    "lookback": [10, 20],
-    "triggerSecs": [30 * 60, 120 * 60],
-    "stopMultiplier" : [1.5, 3.5, True],
-    "parameter": [5.0, 25.0, True],
+    "lookback": [10, 30],
+    "triggerSecs": [15 * 60, 120 * 60],
+    "stopMultiplier" : [.5, 2.5, True],
+    "parameter": [5.0, 30.0, True],
     "recalcOnLoss": "false",
-    "getFlatOnClose": "false",
+    "getFlatOnClose": "true",
     "ziReversionFactor" : 0}
                                               )
 
@@ -92,7 +93,7 @@ rsireversion_traders_ST = AgentConfiguration( "RsiReversionST", {
 
 ## PullbackReversion traders
 pullbackreversion_traders_ST = AgentConfiguration( "PullbackReversionST", {
-    "initialCash": 300000,
+    "initialCash": 100000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -110,17 +111,17 @@ pullbackreversion_traders_ST = AgentConfiguration( "PullbackReversionST", {
 
 ## ScalperReversion traders
 scalperreversion_traders_ST = AgentConfiguration( "ScalperReversionST", {
-    "initialCash": 300000,
+    "initialCash": 100000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
     "agentSymbols": intraday_traders_agentSymbols,
-    "lookback": [25, 50],
-    "triggerSecs": [30 * 60, 90 * 60],
-    "stopMultiplier" : [1.5, 3.5, True],
-    "parameter": [1.25, 2.5, True],
+    "lookback": [10, 30],
+    "triggerSecs": [15 * 60, 120 * 60],
+    "stopMultiplier" : [.5, 2.5, True],
+    "parameter": [0.5, 4.0, True],
     "recalcOnLoss": "false",
-    "getFlatOnClose": "false",
+    "getFlatOnClose": "true",
     "ziReversionFactor" : 0}
                                                   )
 
@@ -148,7 +149,7 @@ portfolio_trader = AgentConfiguration( "PortfolioTrader", {
     "latencyStdevPct": 0.5,
     "agentSymbols": intraday_traders_agentSymbols,
     "portfolioHorizonRangeMin" : 5,
-    "portfolioHorizonRangeMax" : 60,
+    "portfolioHorizonRangeMax" : 30,
     "initialVol" : 0.02,
     "epsGrowthRate": 0.0003,
     "epsGrowthRateStd": 0.006,

@@ -17,6 +17,7 @@ parser.add_argument("--name", dest="run_name", type = str, help= "name of simula
 parser.add_argument("--seed", dest="seed", type = int, help = "random seed",required=True)
 parser.add_argument("--portfolio-update-pct", dest = "portfolio_update_pct", type = float, default=1.0, help = "Prob for new portfolio on new EPS",required=True )
 parser.add_argument("--basic-trader-cost-scale", dest = "basic_trader_cost_scale", type = float, default=1.0, help = "cost scale for basic trader",required=True )
+parser.add_argument("--algo-cash-scale", dest = "algo_cash_scale", type = float, default=1.0, help = "scale for intraday trader cash",required=True )
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -65,49 +66,49 @@ if __name__ == "__main__":
     new_config.add_agent(
         name=name,
         values=
-            portfolio_trader.make_param(np,n=100).to_dict(orient='records')
+            portfolio_trader.make_param(np,n=50).to_dict(orient='records')
     )
 
     name = "AggressorTrend"
-    aggressor_traders_ST.parameters["initialCash"] = 100000.0
+    aggressor_traders_ST.parameters["initialCash"] = 100000.0*args.algo_cash_scale
 
 
 
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            aggressor_traders_ST.make_param(np,n=100)
+            aggressor_traders_ST.make_param(np,n=50)
         ]).to_dict(orient='records')
     )
 
     name = "BreakoutTrend"
-    breakout_traders_ST.parameters["initialCash"] = 100000.0
+    breakout_traders_ST.parameters["initialCash"] = 100000.0*args.algo_cash_scale
 
 
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            breakout_traders_ST.make_param(np,n=100)
+            breakout_traders_ST.make_param(np,n=50)
         ]).to_dict(orient='records')
     )
 
     name = "RsiReversion"
-    rsireversion_traders_ST.parameters["initialCash"] = 100000.0
+    rsireversion_traders_ST.parameters["initialCash"] = 100000.0*args.algo_cash_scale
 
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            rsireversion_traders_ST.make_param(np,n=100)
+            rsireversion_traders_ST.make_param(np,n=50)
         ]).to_dict(orient='records')
     )
 
     name = "ScalperReversion"
-    scalperreversion_traders_ST.parameters["initialCash"] = 100000.0
+    scalperreversion_traders_ST.parameters["initialCash"] = 100000.0*args.algo_cash_scale
 
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            scalperreversion_traders_ST.make_param(np,n=100)
+            scalperreversion_traders_ST.make_param(np,n=50)
         ]).to_dict(orient='records')
     )
 
