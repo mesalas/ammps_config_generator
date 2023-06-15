@@ -53,7 +53,7 @@ if __name__ == "__main__":
     name = "BasicTrader"
 
     basic_trader.parameters["costScale"] = args.basic_trader_cost_scale
-    basic_trader.parameters["triggerSecs"] = [int(args.basic_trader_trigger_min), int(args.basic_trader_trigger_max)]
+    basic_trader.parameters["triggerSecs"] = [int(args.basic_trader_trigger_min), int(args.basic_trader_trigger_max)+1]
     basic_traders = basic_trader.make_param(np,n=250).to_dict(orient='records')
 
 
