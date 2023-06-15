@@ -15,7 +15,8 @@ parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument("--out-dir", dest="conf_dir", default = "",type = str, help = "output directory")
 parser.add_argument("--name", dest="run_name", type = str, help= "name of simulation in ammps", required=True)
 parser.add_argument("--seed", dest="seed", type = int, help = "random seed",required=True)
-parser.add_argument("--portfolio-update-pct", dest = "portfolio_update_pct", type = float, default=1.0, help = "Prob for new portfolio on new EPS",required=True )
+parser.add_argument("--basic-trader-trigger-min", dest = "basic-trader-trigger-min", type = float, default=1.0, help = "minimum sec for basic trader trigger",required=True )
+parser.add_argument("--basic-trader-trigger-max", dest = "basic-trader-trigger-max", type = float, default=1.0, help = "minimum sec for basic trader trigger",required=True )
 parser.add_argument("--basic-trader-cost-scale", dest = "basic_trader_cost_scale", type = float, default=1.0, help = "cost scale for basic trader",required=True )
 parser.add_argument("--algo-cash-scale", dest = "algo_cash_scale", type = float, default=1.0, help = "scale for intraday trader cash",required=True )
 
@@ -52,6 +53,7 @@ if __name__ == "__main__":
     name = "BasicTrader"
 
     basic_trader.parameters["costScale"] = args.basic_trader_cost_scale
+    basic_trader.parameters["triggerSecs"] = [args.basic_trader_trigger_min, args.basic_trader_trigger_max]
     basic_traders = basic_trader.make_param(np,n=250).to_dict(orient='records')
 
 
