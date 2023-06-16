@@ -36,7 +36,7 @@ marketmaker_traders = AgentConfiguration( "MarketMaker",
 intraday_traders_minLatency = 100
 intraday_traders_meanLatency = 500000
 intraday_traders_latencyStdevPct = 0.5
-intraday_traders_agentSymbols = "ABC,DEF,GHI"
+intraday_traders_agentSymbols = "ABC"
 
 
 ## Aggressor traders
@@ -160,6 +160,6 @@ basic_trader = AgentConfiguration("BasicTrader" , {"initialCash" : 100000,
                                                    "minLatency": 100,
                                                    "meanLatency" : 60000000,
                                                    "latencyStdevPct" : 0.5,
-                                                   "agentSymbols": "ABC,DEF,GHI",
+                                                   "agentSymbols": intraday_traders_agentSymbols,
                                                    "costScale" : 0.25,
                                                    "triggerSecs" : [23400,23400]})

@@ -19,6 +19,10 @@ parser.add_argument("--basic-trader-trigger-min", dest = "basic_trader_trigger_m
 parser.add_argument("--basic-trader-trigger-max", dest = "basic_trader_trigger_max", type = float, default=1.0, help = "minimum sec for basic trader trigger",required=True )
 parser.add_argument("--basic-trader-cost-scale", dest = "basic_trader_cost_scale", type = float, default=1.0, help = "cost scale for basic trader",required=True )
 parser.add_argument("--algo-cash-scale", dest = "algo_cash_scale", type = float, default=1.0, help = "scale for intraday trader cash",required=True )
+parser.add_argument("--market-maker-lookback-length", dest="market_maker_lookback_length", type = int, help = "",required=True)
+parser.add_argument("--market-maker-lookback-secs", dest="market_maker_lookback_secs", type = int, help = "",required=True)
+parser.add_argument("--market-maker-mp-lookback-length", dest="market_maker_mp_lookback_length", type = int, help = "",required=True)
+parser.add_argument("--n-day-traders", dest="n_day_traders", type = int, help = "",required=True)
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -43,6 +47,10 @@ if __name__ == "__main__":
         start_date_dt.year, start_date_dt.month, start_date_dt.day, 9, 30, 00,
         end_date_dt.year, end_date_dt.month, end_date_dt.day, 16, 30, 00
     )
+
+    marketmaker_traders.parameters["updateSecs"] =  [args.market_maker_lookback_secs, args.market_maker_lookback_secs+1, True]
+    marketmaker_traders.parameters["lookbackPeriods"] =  args.market_maker_lookback_length
+    marketmaker_traders.parameters["mpLookback"] =  [args.market_maker_mp_lookback_length, args.market_maker_mp_lookback_length+1, True]
 
     new_config.add_agent(
         name=marketmaker_traders.name,
@@ -71,7 +79,7 @@ if __name__ == "__main__":
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            aggressor_traders_ST.make_param(np,n=50)
+            aggressor_traders_ST.make_param(np,n=args.n_day_traders)
         ]).to_dict(orient='records')
     )
 
@@ -82,7 +90,7 @@ if __name__ == "__main__":
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            breakout_traders_ST.make_param(np,n=50)
+            breakout_traders_ST.make_param(np,n=args.n_day_traders)
         ]).to_dict(orient='records')
     )
 
@@ -92,7 +100,7 @@ if __name__ == "__main__":
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            rsireversion_traders_ST.make_param(np,n=50)
+            rsireversion_traders_ST.make_param(np,n=args.n_day_traders)
         ]).to_dict(orient='records')
     )
 
@@ -102,7 +110,7 @@ if __name__ == "__main__":
     new_config.add_agent(
         name=name,
         values=pd.concat([
-            scalperreversion_traders_ST.make_param(np,n=50)
+            scalperreversion_traders_ST.make_param(np,n=args.n_day_traders)
         ]).to_dict(orient='records')
     )
 
