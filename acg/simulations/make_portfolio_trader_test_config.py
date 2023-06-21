@@ -2,7 +2,7 @@ import sys
 sys.path.append('../..')
 
 from acg.configgenerator import configuration_generator
-from acg.baseconfiguration.portfolio_test_sim_configuration import *
+from acg.baseconfiguration.basic_trader_test_configuration import *
 
 import pandas as pd
 import argparse
@@ -15,9 +15,10 @@ parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument("--out-dir", dest="conf_dir", default = "",type = str, help = "output directory")
 parser.add_argument("--name", dest="run_name", type = str, help= "name of simulation in ammps", required=True)
 parser.add_argument("--seed", dest="seed", type = int, help = "random seed",required=True)
-parser.add_argument("--zi-scaler", dest = "ZI_n_scaler", type = float, default=1.0, help = "scaling factor scaling the number of Zi agnets",required=True )
-parser.add_argument("--zi-tp-max", dest = "zi_tp_max", type = float, default=1.0, help = "value for take profit for Zi agnets",required=True )
 parser.add_argument("--portfolio-update-pct", dest = "portfolio_update_pct", type = float, default=1.0, help = "Prob for new portfolio on new EPS",required=True )
+parser.add_argument("--n-portfolio-investors",dest = "n_portfolio_investors",type = float)
+parser.add_argument("--rebalance-threshold-max", dest = "rebalance_threshold_max",type = float)
+parser.add_argument("--update-portfolio-threshold_max", dest = "update_portfolio_threshold_max",type = float)
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -45,21 +46,15 @@ if __name__ == "__main__":
 
     new_config.add_agent(
         name=marketmaker_traders.name,
-        values=marketmaker_traders.make_param(np,9).to_dict(orient='records')
+        values=marketmaker_traders.make_param(np,3).to_dict(orient='records')
     )
 
-    # Zero info traders
-    name = "ZeroInfo"
-    n_zi_st = 100*args.ZI_n_scaler
+    # Basic traders
+    name = "BasicTrader"
+    basic_traders = basic_trader.make_param(np,n=250).to_dict(orient='records')
 
-    zero_info_trader_ST.parameters["stopMultiplier"] = [0.5, args.zi_tp_max, True]
-    zi_st_get_flat = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
 
-    agent_values = zi_st_get_flat
-
-    for d in agent_values:
-        d["parameter"] = d["triggerSecs"]
-
+    agent_values = basic_traders
     new_config.add_agent(
         name=name,
         values=agent_values
@@ -67,10 +62,14 @@ if __name__ == "__main__":
 
     name = "PortfolioTrader"
     portfolio_trader.parameters["updateOnEarningsPct"] = args.portfolio_update_pct
+    portfolio_trader.parameters["rebalanceThresholdMin"] = 0.0
+    portfolio_trader.parameters["rebalanceThresholdMax"] = args.rebalance_threshold_max
+    portfolio_trader.parameters["updatePortfolioThresholdMin"] = 0.0
+    portfolio_trader.parameters["updatePortfolioThresholdMax"] = args.update_portfolio_threshold_max
     new_config.add_agent(
         name=name,
         values=
-            portfolio_trader.make_param(np,n=100).to_dict(orient='records')
+            portfolio_trader.make_param(np,n=args.n_portfolio_investors).to_dict(orient='records')
     )
 
     new_config.write_file()

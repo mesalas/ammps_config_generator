@@ -14,11 +14,11 @@ marketmaker_traders = AgentConfiguration( "MarketMaker",
                                            "symbolBCorrelation": 0.02,
                                            "symbolC": "GHI",
                                            "symbolCCorrelation": 0.02,
-                                           "updateSecs": [600, 601, True],
-                                           "lookbackPeriods": 50,
+                                           "updateSecs": [60, 61, True],
+                                           "lookbackPeriods": 15,
                                            "mpLookback": [120,121, True],
-                                           "spreadFactor": [0.15, 0.16, True],
-                                           "recalcOnLoss": "true",
+                                           "spreadFactor": [0.1, 0.11, True],
+                                           "recalcOnLoss": "false",
                                            "workSize": 105,
                                            "levels": 30,
                                            "minSpread": 0.0101,
@@ -126,20 +126,6 @@ scalperreversion_traders_ST = AgentConfiguration( "ScalperReversionST", {
                                                   )
 
 
-zero_info_trader_ST = AgentConfiguration( "ZeroInfoST", {
-    "initialCash": 100000,
-    "minLatency": intraday_traders_minLatency,
-    "meanLatency": intraday_traders_meanLatency,
-    "latencyStdevPct": intraday_traders_latencyStdevPct,
-    "agentSymbols": intraday_traders_agentSymbols,
-    "lookback": [20, 50],
-    "triggerSecs": [600, 3600],
-    "stopMultiplier": [0.5, 5., True],
-    "parameter": [600, 3600, True],
-    "recalcOnLoss": "false",
-    "getFlatOnClose" : "false",
-    "ziReversionFactor" : 0.25}
-                                          )
 
 
 portfolio_trader = AgentConfiguration( "PortfolioTrader", {
@@ -153,8 +139,13 @@ portfolio_trader = AgentConfiguration( "PortfolioTrader", {
     "initialVol" : 0.02,
     "epsGrowthRate": 0.0003,
     "epsGrowthRateStd": 0.006,
-    "updateOnEarningsPct" : 1.0}
-                                          )
+    "updateOnEarningsPct" : 1.0,
+    "rebalanceThresholdMin" :0.01 ,
+    "rebalanceThresholdMax" : 0.05,
+    "updatePortfolioThresholdMin" : 0.05,
+    "updatePortfolioThresholdMax" :0.1
+}
+    )
 
 basic_trader = AgentConfiguration("BasicTrader" , {"initialCash" : 100000,
                                                    "minLatency": 100,
@@ -162,4 +153,4 @@ basic_trader = AgentConfiguration("BasicTrader" , {"initialCash" : 100000,
                                                    "latencyStdevPct" : 0.5,
                                                    "agentSymbols": intraday_traders_agentSymbols,
                                                    "costScale" : 0.25,
-                                                   "triggerSecs" : [23400,23400]})
+                                                   "triggerSecs" : [0.1*23400,2*23400]})
