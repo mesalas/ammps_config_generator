@@ -153,4 +153,4 @@ basic_trader = AgentConfiguration("BasicTrader" , {"initialCash" : 100000,
                                                    "latencyStdevPct" : 0.5,
                                                    "agentSymbols": intraday_traders_agentSymbols,
                                                    "costScale" : 0.25,
-                                                   "triggerSecs" : [0.1*23400,2*23400]})
+                                                   "triggerSecs" : [int(0.1*23400),int(2*23400)]})
