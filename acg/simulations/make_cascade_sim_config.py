@@ -2,7 +2,7 @@ import sys
 sys.path.append('../..')
 
 from acg.configgenerator import configuration_generator
-from acg.baseconfiguration.portfolio_test_sim_configuration import *
+from acg.baseconfiguration.basic_trader_test_configuration import *
 import pandas as pd
 import argparse
 import datetime
@@ -15,9 +15,8 @@ parser.add_argument("--out-dir", dest="conf_dir", default = "",type = str, help 
 parser.add_argument("--name", dest="run_name", type = str, help= "name of simulation in ammps", required=True)
 parser.add_argument("--seed", dest="seed", type = int, help = "random seed",required=True)
 parser.add_argument("--days", dest="number_of_days", type = int, default = 261, help = "days to simulate")
-parser.add_argument("--zi-scaler", dest = "ZI_n_scaler", type = float, default=1.0, help = "scaling factor scaling the number of Zi agnets",required=True )
+parser.add_argument("--n-basic-trader", dest = "n_basic_trader", type = float, default=1.0, help = "scaling the number of basic trader agnets",required=True )
 parser.add_argument("--algo-cash-scaler", dest = "algo_cash_scaler", type = float, default=1.0, help = "scaling factor scaling cash for algo/intraday agents",required=True )
-parser.add_argument("--portfolio-update-pct", dest = "portfolio_update_pct", type = float, default=1.0, help = "Prob for new portfolio on new EPS",required=True )
 
 
 if __name__ == "__main__":
@@ -49,34 +48,20 @@ if __name__ == "__main__":
     name = "MarketMaker"
     new_config.add_agent(
         name=name,
-        values=marketmaker_traders.make_param(np,9).to_dict(orient='records')
+        values=marketmaker_traders.make_param(np,6).to_dict(orient='records')
     )
+    # Basic traders
+    name = "BasicTrader"
+    basic_traders = basic_trader.make_param(np,n=int(250*args.n_basic_trader)).to_dict(orient='records')
 
-    name = "PortfolioTrader"
-    portfolio_trader.parameters["updateOnEarningsPct"]  = args.portfolio_update_pct
-    portfolio_traders = portfolio_trader.make_param(np,100).to_dict(orient='records')
-    new_config.add_agent(
-        name=name,
-        values=portfolio_trader.make_param(np,100).to_dict(orient='records')
-    )
 
-    # Zero info traders
-    name = "ZeroInfo"
-    n_zi_st = int(50 * args.ZI_n_scaler)
-    zi_st = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
-
-    agent_values = zi_st
-
-    for d in agent_values:
-        d["parameter"] = d["triggerSecs"]
-
+    agent_values = basic_traders
     new_config.add_agent(
         name=name,
         values=agent_values
     )
-
     name = "AggressorTrend"
-    aggressor_traders_ST.parameters["initialCash"] = 150000.0 * args.algo_cash_scaler
+    aggressor_traders_ST.parameters["initialCash"] = aggressor_traders_ST.parameters["initialCash"] * args.algo_cash_scaler
 
 
 
@@ -88,7 +73,7 @@ if __name__ == "__main__":
     )
 
     name = "BreakoutTrend"
-    breakout_traders_ST.parameters["initialCash"] = 150000.0 * args.algo_cash_scaler
+    breakout_traders_ST.parameters["initialCash"] = breakout_traders_ST.parameters["initialCash"] * args.algo_cash_scaler
 
 
     new_config.add_agent(
@@ -99,7 +84,7 @@ if __name__ == "__main__":
     )
 
     name = "RsiReversion"
-    rsireversion_traders_ST.parameters["initialCash"] = 150000.0 * args.algo_cash_scaler
+    rsireversion_traders_ST.parameters["initialCash"] = rsireversion_traders_ST.parameters["initialCash"] * args.algo_cash_scaler
 
     new_config.add_agent(
         name=name,
@@ -109,7 +94,7 @@ if __name__ == "__main__":
     )
 
     name = "ScalperReversion"
-    scalperreversion_traders_ST.parameters["initialCash"] = 150000.0 * args.algo_cash_scaler
+    scalperreversion_traders_ST.parameters["initialCash"] = scalperreversion_traders_ST.parameters["initialCash"] * args.algo_cash_scaler
 
     new_config.add_agent(
         name=name,
