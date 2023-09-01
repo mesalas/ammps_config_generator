@@ -5,8 +5,8 @@ from acg.configgenerator.agent_configuration import AgentConfiguration
 ### MARKET MAKERS ###
 marketmaker_traders = AgentConfiguration( "MarketMaker",
                                           {"initialCash": 1000000,
-                                           "minLatency": 25,
-                                           "meanLatency": 150,
+                                           "minLatency": 17,
+                                           "meanLatency": 25,
                                            "latencyStdevPct": 0.5,
                                            "symbolA": "ABC",
                                            "symbolACorrelation": 0.02,
@@ -33,8 +33,8 @@ marketmaker_traders = AgentConfiguration( "MarketMaker",
 ### INTRADAY TRADERS ###
 
 # Shared variables
-intraday_traders_minLatency = 100
-intraday_traders_meanLatency = 500000
+intraday_traders_minLatency = 17
+intraday_traders_meanLatency = 1500
 intraday_traders_latencyStdevPct = 0.5
 intraday_traders_agentSymbols = "ABC"
 
@@ -148,8 +148,8 @@ portfolio_trader = AgentConfiguration( "PortfolioTrader", {
     )
 
 basic_trader = AgentConfiguration("BasicTrader" , {"initialCash" : 25000,
-                                                   "minLatency": 100,
-                                                   "meanLatency" : 60000000,
+                                                   "minLatency": 17,
+                                                   "meanLatency" : 5000000,
                                                    "latencyStdevPct" : 0.5,
                                                    "agentSymbols": intraday_traders_agentSymbols,
                                                    "costScale" : 0.5,
