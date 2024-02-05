@@ -198,11 +198,11 @@ lucas_marketmaker_traders = AgentConfiguration( "LucasMarketMaker",
                                            "followTrend" : 0.0,
                                            "scaleWorkSize": "true",
                                            "lucasFactor" : 0.0,
-                                           "CRRA" : 3.0,
-                                           "discountFactor" : 0.99,
+                                           "CRRA" : 6.0,
+                                           "discountFactor" : 0.9,
                                            "dividendGrowthRate": 1.000203,
                                            "dividendStd": 0.011983,
-                                           "daysPerQuarter" : 90}
+                                           "daysPerQuarter" : 60}
                                           )
 
 internal_marketmaker  = AgentConfiguration( "InternalMarketMaker",
