@@ -111,7 +111,7 @@ def make_lucas_shark(random_seed, run_name, number_of_days, config_dir, lucas_fa
     agent_values = zi_st_get_flat
 
     for d in agent_values:
-        d["parameter"] = d["triggerSecs"]
+         d["triggerSecs"] = d["parameter"]
     new_config.add_agent(
         name=name,
         values=agent_values
