@@ -73,7 +73,7 @@ def make_lucas_shark(random_seed, run_name, number_of_days, config_dir, lucas_fa
     agent_values = dividend_longshort_institutions.make_param(np, n_dls_institutions).to_dict(
         orient='records')
     for d in agent_values:
-        d["initialCash"] = 250000.0*(0.2+np.random.random()*(1.8-0.2))
+        d["initialCash"] = 500000.0*(0.2+np.random.random()*(1.8-0.2))
 
     if n_dls_institutions > 0:
         new_config.add_agent(
@@ -101,11 +101,11 @@ def make_lucas_shark(random_seed, run_name, number_of_days, config_dir, lucas_fa
     )
     # Zero info traders
     name = "ZeroInfo"
-    n_zi_st = 30
+    n_zi_st = 100
     zero_info_trader_ST.parameters["parameterMin"] = 600
-    zero_info_trader_ST.parameters["parameterMax"] = 1800
-    zero_info_trader_ST.parameters["ziReversionFactor"] = 0.1
-    zero_info_trader_ST.parameters["initialCash"] = 100000.0
+    zero_info_trader_ST.parameters["parameterMax"] = 3600
+    zero_info_trader_ST.parameters["ziReversionFactor"] = 0.5
+    zero_info_trader_ST.parameters["initialCash"] = 250000.0
     zi_st_get_flat = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
     zero_info_trader_ST.parameters["getFlatOnClose"] = "false"
 

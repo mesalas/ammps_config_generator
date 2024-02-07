@@ -49,11 +49,11 @@ dividend_longshort_institutions = AgentConfiguration( "DividendInstitution" ,
                                                 {"minLatency" : 100,
                                                  "meanLatency" : 500000,
                                                  "latencyStdevPct" : 0.5,
-                                                 "forecastMin" : 30,
-                                                 "ForecastMax" : 120,
+                                                 "forecastMin" : 1,
+                                                 "ForecastMax" : 30,
                                                  "sizeMin" : 0.005, "sizeMax" : 0.025,
                                                  "initialCash" : 1000000.0,
-                                                 "entryThreshold" : [0.01, 0.05, True],
+                                                 "entryThreshold" : [0.0, 0.5, True],
                                                  "defaultVol" : 0.01,
                                                  "discountFactor" : 0.9,
                                                  "CRRA" : 6.0,
@@ -61,7 +61,7 @@ dividend_longshort_institutions = AgentConfiguration( "DividendInstitution" ,
                                                  "dividendStd" : 0.011983,
                                                  "daysPerQuarter" : 60,
                                                  "symbol" : "ABC_NYSE",
-                                                 "valuationStd" : 0.25})
+                                                 "valuationStd" : 5})
 
 # chock_institutions = traders_v2.Institutions(
 #     initial_number = 1,
