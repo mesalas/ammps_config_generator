@@ -17,10 +17,12 @@ parser.add_argument("--seed", dest="seed", type = int, help = "random seed",requ
 parser.add_argument("--days", dest="number_of_days", type = int, default = 261, help = "days to simulate")
 parser.add_argument("--mm_lucas_factor", dest="mm_lucas_factor", type = float, help = "weight of lucas asset pricing in market maker pricing",required=True)
 parser.add_argument("--mm_size", dest="mm_size",default = 105, type = float, help = "size of market maker liquidity on each level ",required=False)
-parser.add_argument("--inst_val_std", dest="dividend_val_std",default = 0.15, type = float, help = "Stdiv of dividend institutions valuations",required=False)
+parser.add_argument("--dividend_growth_rate", dest="div_growth_rate",default = 1.000203, type = float, help = "Growth rate of the dividend process",required=False)
+parser.add_argument("--dividend_std", dest="div_std",default = 0.011983, type = float, help = "Standard deviation of the dividend process",required=False)
+parser.add_argument("--inst_val_std", dest="dividend_val_std",default = 5.0, type = float, help = "Stdiv of dividend institutions valuations",required=False)
 
 
-def make_lucas_shark(random_seed, run_name, number_of_days, config_dir, lucas_factor, mmsize, divided_inst_valuationStd):
+def make_lucas_shark(random_seed, run_name, number_of_days, config_dir, lucas_factor, mmsize, divided_inst_valuationStd, dividend_growth_rate, dividend_std):
 
     np.random.seed(random_seed)
 
@@ -43,6 +45,9 @@ def make_lucas_shark(random_seed, run_name, number_of_days, config_dir, lucas_fa
     lucas_marketmaker_traders.parameters["workSize"] = mmsize
     lucas_marketmaker_traders.parameters["spreadFactor"] =  [0.15, 0.16, True]
 
+    lucas_marketmaker_traders.parameters["dividendGrowthRate"] = dividend_growth_rate
+    lucas_marketmaker_traders.parameters["dividendStd"] = dividend_std
+
     new_config.add_agent(
         name=lucas_marketmaker_traders.name,
         values=lucas_marketmaker_traders.make_param(np,9).to_dict(orient='records')
@@ -63,7 +68,8 @@ def make_lucas_shark(random_seed, run_name, number_of_days, config_dir, lucas_fa
     n_dls_institutions = 100
     name = "DividendInstitution"
     dividend_longshort_institutions.parameters["valuationStd"] = divided_inst_valuationStd
-
+    dividend_longshort_institutions.parameters["dividendGrowthRate"] = dividend_growth_rate
+    dividend_longshort_institutions.parameters["dividendStd"] = dividend_std
     agent_values = dividend_longshort_institutions.make_param(np, n_dls_institutions).to_dict(
         orient='records')
     for d in agent_values:
@@ -169,5 +175,5 @@ if __name__ == "__main__":
         args_string = args_string + " " + sys.argv[i]
     print("Started with the following arguments:", args_string)
 
-    make_lucas_shark(args.seed,args.run_name,args.number_of_days,args.conf_dir,args.mm_lucas_factor,args.mm_size, args.dividend_val_std)
+    make_lucas_shark(args.seed,args.run_name,args.number_of_days,args.conf_dir,args.mm_lucas_factor,args.mm_size, args.dividend_val_std, args.div_growth_rate, args.div_std)
 
