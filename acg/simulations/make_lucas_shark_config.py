@@ -101,9 +101,8 @@ def make_lucas_shark(random_seed, run_name, number_of_days, config_dir, lucas_fa
     )
     # Zero info traders
     name = "ZeroInfo"
-    n_zi_st = 100
-    zero_info_trader_ST.parameters["parameterMin"] = 600
-    zero_info_trader_ST.parameters["parameterMax"] = 3600
+    n_zi_st = 50
+    zero_info_trader_ST.parameters["parameter"] = [600, 3600, True]
     zero_info_trader_ST.parameters["ziReversionFactor"] = 0.5
     zero_info_trader_ST.parameters["initialCash"] = 250000.0
     zi_st_get_flat = zero_info_trader_ST.make_param(np,n=n_zi_st).to_dict(orient='records')
