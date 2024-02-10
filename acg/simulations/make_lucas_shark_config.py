@@ -17,8 +17,8 @@ parser.add_argument("--seed", dest="seed", type = int, help = "random seed",requ
 parser.add_argument("--days", dest="number_of_days", type = int, default = 261, help = "days to simulate")
 parser.add_argument("--mm_lucas_factor", dest="mm_lucas_factor", type = float, help = "weight of lucas asset pricing in market maker pricing",required=True)
 parser.add_argument("--mm_size", dest="mm_size",default = 105, type = float, help = "size of market maker liquidity on each level ",required=False)
-parser.add_argument("--dividend_growth_rate", dest="div_growth_rate",default = 1.000203, type = float, help = "Growth rate of the dividend process",required=False)
-parser.add_argument("--dividend_std", dest="div_std",default = 0.011983, type = float, help = "Standard deviation of the dividend process",required=False)
+parser.add_argument("--dividend_growth_rate", dest="div_growth_rate",default = 1.0002, type = float, help = "Growth rate of the dividend process",required=False)
+parser.add_argument("--dividend_std", dest="div_std",default = 0.011, type = float, help = "Standard deviation of the dividend process",required=False)
 parser.add_argument("--inst_val_std", dest="dividend_val_std",default = 5.0, type = float, help = "Stdiv of dividend institutions valuations",required=False)
 
 
