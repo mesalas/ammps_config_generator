@@ -18,7 +18,7 @@ portfolio_trader = AgentConfiguration( "RandomPortfolioTrader",
                                                    "epsGrowthRate" : 0.0,
                                                    "epsGrowthRateStd" : 0.0,
                                                    "earningsZscoreThreshold" : 0.0,
-                                                   "updatePortfolioThresholdMin" : 0.5,
+                                                   "updatePortfolioThresholdMin" : 0.0,
                                                    "updatePortfolioThresholdMax" : 5.0,
                                                    "updateCovariance" : "true",
                                                    "alpha" : 0.0
