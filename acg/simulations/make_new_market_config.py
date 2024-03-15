@@ -58,7 +58,7 @@ def make_new_market_config(args):
     )
 
     eps_portfolio_trader.parameters["updatePortfolioThresholdMax"] = args.rebalance_factor_eps
-    eps_portfolio_trader.parameters["earningsZscoreThreshold"] = args.update_threshold
+    eps_portfolio_trader.parameters["earningsZscoreThreshold"] = [args.update_threshold,100.0]
     new_config.add_agent(
         name=eps_portfolio_trader.name,
         values=eps_portfolio_trader.make_param(np, args.num_eps_traders).to_dict(orient='records')  # Adjusted to pass rebalance_factor_eps and update_threshold
