@@ -52,7 +52,7 @@ if __name__ == "__main__":
     )
     # Basic traders
     name = "BasicTrader"
-    basic_traders = basic_trader.make_param(np,n=int(250*args.n_basic_trader)).to_dict(orient='records')
+    basic_traders = basic_trader.make_param(np,n=int(125*args.n_basic_trader)).to_dict(orient='records')
 
 
     agent_values = basic_traders

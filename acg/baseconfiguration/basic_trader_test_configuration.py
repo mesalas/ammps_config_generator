@@ -41,7 +41,7 @@ intraday_traders_agentSymbols = "ABC"
 
 ## Aggressor traders
 aggressor_traders_ST = AgentConfiguration( "AggressorTrendST", {
-    "initialCash" : 100000.0,
+    "initialCash" : 200000.0,
     "minLatency" : intraday_traders_minLatency,
     "meanLatency" : intraday_traders_meanLatency,
     "latencyStdevPct" : intraday_traders_latencyStdevPct,
@@ -58,7 +58,7 @@ aggressor_traders_ST = AgentConfiguration( "AggressorTrendST", {
 
 ## BreakoutTrend traders
 breakout_traders_ST = AgentConfiguration( "BreakoutTrendST", {
-    "initialCash": 100000.0,
+    "initialCash": 200000.0,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -75,7 +75,7 @@ breakout_traders_ST = AgentConfiguration( "BreakoutTrendST", {
 
 ## RsiReversion
 rsireversion_traders_ST = AgentConfiguration( "RsiReversionST", {
-    "initialCash": 100000.0,
+    "initialCash": 200000.0,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -93,7 +93,7 @@ rsireversion_traders_ST = AgentConfiguration( "RsiReversionST", {
 
 ## PullbackReversion traders
 pullbackreversion_traders_ST = AgentConfiguration( "PullbackReversionST", {
-    "initialCash": 100000,
+    "initialCash": 200000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
@@ -111,7 +111,7 @@ pullbackreversion_traders_ST = AgentConfiguration( "PullbackReversionST", {
 
 ## ScalperReversion traders
 scalperreversion_traders_ST = AgentConfiguration( "ScalperReversionST", {
-    "initialCash": 100000,
+    "initialCash": 200000,
     "minLatency": intraday_traders_minLatency,
     "meanLatency": intraday_traders_meanLatency,
     "latencyStdevPct": intraday_traders_latencyStdevPct,
